@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Avoid Deep Hurting! Deployment beyond git</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/cowsay.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,7 +24,30 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
+				<section>
+          <section>
+            <h1>Avoid</h1>
+            <h1 class="deep-hurting">DEEP HURTING!</h1>
+            <p>Deployments beyond git</p>
+          </section>
+          <section>
+            <pre style="font-size:1em;">
+      _________________
+    /                   \
+    |  Time to deploy!  |
+    \                   /
+      -----------------
+             \   ^__^
+              \  (oo)\_______
+                 (__)\       )\/\
+                     ||----w |
+                     ||     ||
+            </pre>
+          </section>
+          <section data-background="images/deepHurting.gif" data-background-size="contain">
+            &nbsp;
+          </section>
+        </section>
 				<section>Slide 2</section>
 			</div>
 		</div>
@@ -35,12 +58,16 @@
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				history: true,
+        history: true,
+        controls: false,
+        progress: true,
+        center: true,
+        width: 1024,
+        height: 763,
+        transition: 'slide',
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
