@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Avoid Deep Hurting! Deployment beyond git</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/cowsay.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +24,112 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+          <section>
+            <h1>Avoid</h1>
+            <h1 class="deep-hurting">DEEP HURTING!</h1>
+            <p>Deployments beyond git</p>
+          </section>
+          <section>
+            <pre style="font-size:1em;">
+      _________________
+    /                   \
+    |  Time to deploy!  |
+    \                   /
+      -----------------
+             \   ^__^
+              \  (oo)\_______
+                 (__)\       )\/\
+                     ||----w |
+                     ||     ||
+            </pre>
+          </section>
+        </section>
+
+				<section>
+          <section>
+            <p>socketwench intro slide</p>
+          </section>
+          <section>
+            <p>TEN7 marketing slide</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Deploying Drupal: A history</h1>
+          </section>
+          <section>
+          </section>
+          <section data-background="images/deepHurting.gif" data-background-size="contain">
+            &nbsp;
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>And then git deploy came along...</h1>
+          </section>
+          <section>
+          </section>
+          <section data-background="images/deepHurting.gif" data-background-size="contain">
+            &nbsp;
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>What's git good for?</h1>
+          </section>
+          <section>
+            <h2>git's not good enough</h2>
+            <p class="fragment">You need CI</p>
+          </section>
+        </section>
+
+<!-- CI section may be last, not first -->
+        <section>
+          <section>
+            <h1>Getting CI</h1>
+          </section>
+          <section>
+            <h2>Travis CI</h2>
+            <p>Included for free on Github!</p>
+            <p>Public repos only, some limitations</p>
+          </section>
+          <section>
+            <h2>Self-hosted, OSS CIs</h2>
+            <p>Jenkins</p>
+            <p>Circle CI</p>
+          </section>
+          <section>
+            <h2>Gitlab Runner</h2>
+            <p>Included with Gitlab CE</p>
+            <p>Native integration with Gitlab</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Ansible</h1>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Special thanks</h1>
+            <p class="fragment">Drupal Association</p>
+						<p class="fragment">TEN7</p>
+            <p class="fragment">Jeff Geerling</p>
+            <p class="fragment">and others</p>
+          </section>
+          <section>
+            <h1>Thank you!</h1>
+            <p>&nbsp;</p>
+            <p>socketwench.github.io/avoidDeepHurting</p>
+          </section>
+        </section>
+
 			</div>
 		</div>
 
@@ -39,8 +143,6 @@
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
