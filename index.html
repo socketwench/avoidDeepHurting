@@ -47,8 +47,20 @@
         </section>
 
 				<section>
-          <section>
-            <p>socketwench intro slide</p>
+          <section data-transition="none">
+            <img src="images/socketwench1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/socketwench2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/socketwench3.png" />
+          </section>
+					<section data-transition="none">
+            <img src="images/socketwench4.png" />
+          </section>
+					<section data-transition="none">
+            <img src="images/socketwench5.png" />
           </section>
           <section>
             <p>TEN7 marketing slide</p>
@@ -60,19 +72,114 @@
             <h1>Deploying Drupal: A history</h1>
           </section>
           <section>
+            <h2>Remember...</h2>
+            <p class="fragment">FTP&gt; <span class="blink_me">&block;</span></p>
+          </section>
+          <section>
+            <h2>Or maybe...</h2>
+<pre>
++------------------------------------------------------------------+
+|                                                           - + X  |
++------------------------------------------------------------------+
+|                                                                  |
+|  +------------------------+         +------------------------+   |
+|  |                        |         |                        |   |
+|  |                        | +-----+ |                        |   |
+|  |                        | |     | |                        |   |
+|  |                        | | --> | |                        |   |
+|  |                        | |     | |                        |   |
+|  |                        | +-----+ |                        |   |
+|  |                        | +-----+ |                        |   |
+|  |                        | |     | |                        |   |
+|  |                        | | <-- | |                        |   |
+|  |                        | |     | |                        |   |
+|  |                        | +-----+ |                        |   |
+|  |                        |         |                        |   |
+|  +------------------------+         +------------------------+   |
+|                                                                  |
++------------------------------------------------------------------+
+</pre>
+          </section>
+          <section>
+            <h2>FTP frustrations</h2>
+            <p class="fragment">Insecure!</p>
+            <p class="fragment">Permissions and modes</p>
+            <p class="fragment">Often the only option available</p>
+          </section>
+          <section>
+            <h1>And then git came along...</h1>
+          </section>
+          <section style="text-align: left;">
+            <p>ssh gitlover@savemefromftp.now</p>
+            <p class="fragment">cd /where/my/awesome/site/is</p>
+            <p class="fragment">git pull <span class="blink_me">&block;</span></p>
+          </section>
+          <section>
+            <pre style="font-size:1em;">
+      ___________________
+    /                     \
+    |  But that wasn't    |
+    |  the whole story... |
+    \                     /
+      -------------------
+             \   ^__^
+              \  (><)\_______
+                 (__)\       )\/\
+                     ||----w |
+                     ||     ||
+            </pre>
+          </section>
+          <section style="text-align: left;">
+            <p>ssh gitlover@savemefromftp.now</p>
+            <p class="fragment">cd /where/my/awesome/site/is</p>
+            <p class="fragment">git pull</p>
+            <p class="fragment">drush fra -y</p>
+            <p class="fragment">compass compile -e production --force</p>
+            <p class="fragment">drush updb -y</p>
+            <p class="fragment">drush cc all</p>
+          </section>
+          <section style="text-align: left;">
+            <p>ssh gitlover@savemefromftp.now</p>
+            <p>cd /where/my/drupal/8/site/is</p>
+            <p class="fragment">git pull</p>
+            <p class="fragment">composer update</p>
+            <p class="fragment">drush cim -y</p>
+            <p class="fragment">compass compile -e production --force</p>
+            <p class="fragment">drush updb -y</p>
+            <p class="fragment">drush cr all</p>
+          </section>
+          <section>
+            <h2>What about...?</h2>
+            <p class="fragment">Grunt tasks</p>
+            <p class="fragment">Third party integrations</p>
+            <p class="fragment">Clearing opcache</p>
+            <p class="fragment">Varnish ban</p>
           </section>
           <section data-background="images/deepHurting.gif" data-background-size="contain">
             &nbsp;
           </section>
-        </section>
-
-        <section>
           <section>
-            <h1>And then git deploy came along...</h1>
+            <pre style="font-size:1em;">
+      ___________________
+    /                     \
+    |  And that's when    |
+    |  things go well...  |
+    \                     /
+      -------------------
+             \   ^__^
+              \  (XX)\_______
+                 (__)\       )\/\
+                     ||----w |
+                     ||     ||
+            </pre>
           </section>
           <section>
+            <h2>What can go wrong?</h2>
+            <p class="fragment">Missed .gitignore's</p>
+            <p class="fragment">chmod -R 777 all/the/things</p>
+            <p class="fragment">Need to rollback!</p>
           </section>
-          <section data-background="images/deepHurting.gif" data-background-size="contain">
+          <section data-background="images/endlessSuffering.gif" data-background-size="contain">
             &nbsp;
           </section>
         </section>
@@ -135,7 +242,6 @@
             <p>socketwench.github.io/avoidDeepHurting</p>
           </section>
         </section>
-
 			</div>
 		</div>
 
@@ -145,7 +251,13 @@
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
-				history: true,
+        history: true,
+        controls: false,
+        progress: true,
+        center: true,
+        width: 1024,
+        height: 763,
+        transition: 'slide',
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
