@@ -29,6 +29,8 @@
             <h1>Avoid</h1>
             <h1 class="deep-hurting">DEEP HURTING!</h1>
             <p>Deployments beyond git</p>
+            <p>&nbsp;</p>
+            <small>use &larr;&uarr;&darr;&rarr; or &lt;SPACE&gt;</small>
           </section>
           <section>
             <pre style="font-size:1em;">
@@ -107,12 +109,17 @@
             <p class="fragment">Often the only option available</p>
           </section>
           <section>
-            <h1>And then git came along...</h1>
+            <h2>And then git came along...</h2>
           </section>
           <section style="text-align: left;">
             <p>ssh gitlover@savemefromftp.now</p>
             <p class="fragment">cd /where/my/awesome/site/is</p>
             <p class="fragment">git pull <span class="blink_me">&block;</span></p>
+          </section>
+          <section>
+            <h2>Post-pull tasks are manual</h2>
+            <p>Updating the database, clearing cache</p>
+            <p>Could be done through web UI, but not recommended</p>
           </section>
           <section>
             <pre style="font-size:1em;">
@@ -182,16 +189,133 @@
           <section data-background="images/endlessSuffering.gif" data-background-size="contain">
             &nbsp;
           </section>
+          <section>
+            <h2>Humans are fallible</h2>
+            <p>Even well-written "recipies" require human hands</p>
+            <p>Typos, missed steps can kill a deploy</p>
+          </section>
+          <section>
+            <h2>Git alone isn't enough</h2>
+            <p class="fragment">It's a code history tool...</p>
+            <p class="fragment">...not a deployment tool</p>
+          </section>
         </section>
 
         <section>
           <section>
-            <h1>What's git good for?</h1>
+            <h1>So let's use a script!</h1>
+          </section>
+          <!-- Some kind of comic here -->
+          <section>
+            <h2>Solves <em>some</em> problems</h2>
+            <p>Runs all steps the same each time</p>
+            <small class="fragment">(Kinda.)</small>
           </section>
           <section>
-            <h2>git's not good enough</h2>
-            <p class="fragment">You need CI</p>
+            <h2>Reduces operator errors</h2>
+            <p>Just run the script, and your done...</p>
+            <p>...right?</p>
           </section>
+          <section>
+            <h2>Writing scripts is painful</h2>
+            <p>Obscure UNIXisms</p>
+            <p>Odd programming conventions</p>
+            <p>Can be as complex as application code</p>
+          </section>
+          <!-- COMIC
+               Developer in the corner, small rubber duck appears opposite.
+               "Awww, it's just a little script."
+               More ducks appear.
+               Developer gets nervous.
+               Even more ducks appear.
+               "Ummmm..."
+               Developer eaten alive by pile of ducks
+             -->
+          <section>
+            <h2>Scripts make the problem worse</h2>
+            <p>They are code, not configuration.</p>
+          </section>
+          <section>
+            <h2>Side effects and repeatability</h2>
+            <p>Running the same script twice...</p>
+            <p>...doesn't produce the same results</p>
+          </section>
+          <section>
+            <h2>No idempotence</h2>
+            <p>Litters scripts with <code>if</code>s and <code>elsif</code>s</p>
+]          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Config Management</h1>
+          </section>
+          <!-- Some kind of comic here, probably. -->
+          <section>
+            <h2>Ansible</h2>
+            <p>"Radically simple" IT Automation</p>
+            <p>Open Source on <a href="https://github.com/ansible/ansible">Github</a></p>
+          </section>
+          <section>
+            <h2>Less dependencies</h2>
+            <p>Python 2</p>
+            <p>Works on (most) shared hosts</p>
+          </section>
+          <section>
+            <h2>Batteries included</h2>
+            <p>Modules provide functionality</p>
+            <p>All official modules included</p>
+          </section>
+          <section>
+            <h2>Agentless</h2>
+            <p>Nothing to install on target systems</p>
+            <p>Uses SSH and Public Keys</p>
+          </section>
+          <section>
+            <h2>Serverless</h2>
+            <p>No central puppetmaster server</p>
+            <p>Whatever runs ansible is the controller</p>
+          </section>
+          <section>
+            <h2>Easy to read</h2>
+            <p>Code is sequential YAML</p>
+            <p>No complex server model to learn</p>
+          </section>
+          <section>
+            <h2>Idemnopent</h2>
+            <p>Playbooks describe desired end state</p>
+            <p>Leaves complex if/else logic to modules</p>
+          </section>
+          <section>
+            <h2>Installation</h2>
+            <code>sudo pip install ansible</code>
+            <p>Bypasses system package manager</p>
+          </section>
+          <section>
+            <h2>Python MySQL</h2>
+            <code>pip install MySQL-python</code>
+            <p>Needed for Ansible to work with DBs</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Fixing git deploy</h1>
+          </section>
+          <!-- COMIC
+               Ends on realization that throwing the web directory away is the
+               solution.
+           -->
+           <section>
+             <h2>No more .gitignore hell</h2>
+             <p>"Artefacts" no longer in repo</p>
+             <p>File directory, compiled SASS, etc.</p>
+           </section>
+           <section>
+             <h2>Ready before Go-live</h2>
+             <p>Key assets created before switchover</p>
+             <p>"Zero downtime" deployments</p>
+           </section>
         </section>
 
 <!-- CI section may be last, not first -->
@@ -213,12 +337,6 @@
             <h2>Gitlab Runner</h2>
             <p>Included with Gitlab CE</p>
             <p>Native integration with Gitlab</p>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h1>Ansible</h1>
           </section>
         </section>
 
