@@ -243,7 +243,7 @@
           <section>
             <h2>No idempotence</h2>
             <p>Litters scripts with <code>if</code>s and <code>elsif</code>s</p>
-]          </section>
+          </section>
         </section>
 
         <section>
@@ -262,14 +262,20 @@
             <p>Works on (most) shared hosts</p>
           </section>
           <section>
-            <h2>Batteries included</h2>
-            <p>Modules provide functionality</p>
-            <p>All official modules included</p>
+            <p><code>apt-get install ansible</code></p>
+            <p class="fragment"><code>brew install ansible</code></p>
+            <p class="fragment"><code>pip install ansible</code></p>
+          </section>
+          <section>
+            <h2>Python MySQL</h2>
+            <code>pip install MySQL-python</code>
+            <p>Needed for Ansible to work with DBs</p>
           </section>
           <section>
             <h2>Agentless</h2>
-            <p>Nothing to install on target systems</p>
-            <p>Uses SSH and Public Keys</p>
+            <p class="fragment">Nothing to install on target systems</p>
+            <p class="fragment">Uses SSH and Public Keys</p>
+            <p class="fragment"><a href="https://www.linode.com/docs/security/use-public-key-authentication-with-ssh">Tutorial on Linode docs</a></p>
           </section>
           <section>
             <h2>Serverless</h2>
@@ -277,24 +283,63 @@
             <p>Whatever runs ansible is the controller</p>
           </section>
           <section>
+            <h2>Specifying targets</h2>
+            <p class="fragment">Inventory files</p>
+            <p class="fragment">Text file of IPs/Hostnames</p>
+          </section>
+          <section>
+            <pre>
+              172.52.52.0
+              172.52.52.1
+              172.52.52.2
+            </pre><pre class="fragment">
+              [live]
+              www.example.com
+            </pre><pre class="fragment">
+              [self]
+              localhost ansible_connection=local
+            </pre>
+          </section>
+          <section>
             <h2>Easy to read</h2>
-            <p>Code is sequential YAML</p>
-            <p>No complex server model to learn</p>
+            <p class="fragment">Code is YAML <em>playbooks</em></p>
+            <p class="fragment">Run top-down, no complex server model</p>
+          </section>
+          <section>
+            <pre>
+---
+- hosts: all
+  vars:
+    heyLook: "A variable!"
+  tasks:
+    - name: Make some stuff happen
+            </pre>
+          </section>
+          <section>
+            <h2>Batteries included</h2>
+            <p>Modules provide functionality</p>
+            <p>All official modules included</p>
+          </section>
+          <section>
+            <pre>
+---
+- hosts: all
+  vars:
+    git_dir: "/home/tess/git"
+  tasks:
+    - name: Clone repo
+      git:
+        repo: git@github.com:socketwench/avoidDeepHurting.git
+        dest: "{{ git_dir }}"
+        clone: yes
+        update: yes
+        version: "develop"
+            </pre>
           </section>
           <section>
             <h2>Idemnopent</h2>
             <p>Playbooks describe desired end state</p>
             <p>Leaves complex if/else logic to modules</p>
-          </section>
-          <section>
-            <h2>Installation</h2>
-            <code>sudo pip install ansible</code>
-            <p>Bypasses system package manager</p>
-          </section>
-          <section>
-            <h2>Python MySQL</h2>
-            <code>pip install MySQL-python</code>
-            <p>Needed for Ansible to work with DBs</p>
           </section>
         </section>
 
@@ -303,9 +348,15 @@
             <h1>Fixing git deploy</h1>
           </section>
           <!-- COMIC
-               Ends on realization that throwing the web directory away is the
-               solution.
+            Ends on realization that throwing the web directory away is the
+            solution.
            -->
+          <!-- COMIC
+            Important directories
+            Git repo
+            web directory (pointed to by apache)
+            wip (where builds happen)
+          -->
            <section>
              <h2>No more .gitignore hell</h2>
              <p>"Artefacts" no longer in repo</p>
@@ -315,6 +366,13 @@
              <h2>Ready before Go-live</h2>
              <p>Key assets created before switchover</p>
              <p>"Zero downtime" deployments</p>
+           </section>
+           <section>
+             <h2>Synchronize module</h2>
+             <pre>
+synchronize:
+  src: {{ web dir }}
+             </pre>
            </section>
         </section>
 
