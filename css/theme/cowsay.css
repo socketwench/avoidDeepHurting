@@ -216,7 +216,7 @@ h1.deep-hurting {
  *********************************************/
 .reveal a {
   color: #e7ad52;
-  text-decoration: none;
+  /*text-decoration: none;*/
   -webkit-transition: color .15s ease;
   -moz-transition: color .15s ease;
   transition: color .15s ease; }
