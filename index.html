@@ -289,15 +289,15 @@
           </section>
           <section>
             <pre>
-              172.52.52.0
-              172.52.52.1
-              172.52.52.2
+172.52.52.0
+172.52.52.1
+172.52.52.2
             </pre><pre class="fragment">
-              [live]
-              www.example.com
+[live]
+www.example.com
             </pre><pre class="fragment">
-              [self]
-              localhost ansible_connection=local
+[self]
+localhost ansible_connection=local
             </pre>
           </section>
           <section>
@@ -368,12 +368,92 @@
              <p>"Zero downtime" deployments</p>
            </section>
            <section>
-             <h2>Synchronize module</h2>
              <pre>
-synchronize:
-  src: {{ web dir }}
+- name: Assure the build directory exists.
+  file:
+    path: "{{ build_dir }}"
+    state: directory
+    mode: "0755"
+    group: "www-data"
+            </pre>
+          </section>
+          <section>
+            <pre>
+- name: Copy web files from the repo.
+  synchronize:
+    src: "{{ web_dir }}/"
+    dest: "{{ build_dir }}"
+    delete: yes
              </pre>
            </section>
+           <section>
+             <pre>
+- name: Out with the old...
+  shell: "mv {{ web_dir }} {{ web_dir }}_old"
+  args:
+    creates: "{{ web_dir }}_old"
+    removes: "{{ web_dir }}"
+</pre><pre class="fragment">
+- name: ...in with the new.
+  shell: "mv {{ build_dir }} {{ web_dir }}"
+  args:
+    creates: "{{ web_dir }}"
+    removes: "{{ build_dir }}"
+              </pre>
+            </section>
+            <section>
+              <h2>Capistrano style builds</h2>
+              <p>Timestamp-named build directories</p>
+              <p class="fragment"><code>current</code> symlink used as web directory</p>
+            </section>
+            <!-- COMIC? -->
+            <section>
+              <h2>Problems</h2>
+              <p class="fragment">OpCache refresh must be forced</p>
+              <p class="fragment">Autoloaders can become confused</p>
+            </section>
+            <section>
+              <h2>Post Go-live Tasks</h2>
+              <p class="fragment">Feature revert or Config Sync import</p>
+              <p class="fragment">Database update</p>
+              <p class="fragment">Cache clear</p>
+            </section>
+            <section>
+              <pre>
+- name: Feature revert (Drupal 7)
+  shell: "drush fra -y"
+  args:
+    chdir: "{{ web_dir }}"
+              </pre>
+              <pre class="fragment">
+- name: Config sync import (Drupal 8)
+  shell: "drush cex -y"
+  args:
+    chdir: "{{ web_dir }}"
+              </pre>
+            </section>
+            <section>
+              <pre>
+- name: Update database
+  shell: "drush updb -y"
+  args:
+    chdir: "{{ web_dir }}"
+              </pre>
+            </section>
+            <section>
+              <pre>
+- name: Clear cache (Drupal 7)
+  shell: "drush cc all"
+  args:
+    chdir: "{{ web_dir }}"
+              </pre>
+              <pre class="fragment">
+- name: Clear rebuild (Drupal 8)
+  shell: "drush cr all"
+  args:
+    chdir: "{{ web_dir }}"
+              </pre>
+            </section>
         </section>
 
 <!-- CI section may be last, not first -->
@@ -399,7 +479,18 @@ synchronize:
         </section>
 
         <section>
+          <section>
+            <h1>Keys and credientials?</h1>
+          </section>
+        </section>
 
+        <section>
+          <section>
+            <h1>Takeaways</h1>
+          </section>
+        </section>
+
+        <section>
           <section>
             <h1>Special thanks</h1>
             <p class="fragment">Drupal Association</p>
