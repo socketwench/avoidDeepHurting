@@ -78,31 +78,6 @@
             <p class="fragment">FTP&gt; <span class="blink_me">&block;</span></p>
           </section>
           <section>
-            <h2>Or maybe...</h2>
-<pre>
-+------------------------------------------------------------------+
-|                                                           - + X  |
-+------------------------------------------------------------------+
-|                                                                  |
-|  +------------------------+         +------------------------+   |
-|  |                        |         |                        |   |
-|  |                        | +-----+ |                        |   |
-|  |                        | |     | |                        |   |
-|  |                        | | --> | |                        |   |
-|  |                        | |     | |                        |   |
-|  |                        | +-----+ |                        |   |
-|  |                        | +-----+ |                        |   |
-|  |                        | |     | |                        |   |
-|  |                        | | <-- | |                        |   |
-|  |                        | |     | |                        |   |
-|  |                        | +-----+ |                        |   |
-|  |                        |         |                        |   |
-|  +------------------------+         +------------------------+   |
-|                                                                  |
-+------------------------------------------------------------------+
-</pre>
-          </section>
-          <section>
             <h2>FTP frustrations</h2>
             <p class="fragment">Insecure!</p>
             <p class="fragment">Permissions and modes</p>
@@ -137,23 +112,23 @@
             </pre>
           </section>
           <section style="text-align: left;">
-            <p>ssh gitlover@savemefromftp.now</p>
-            <p class="fragment">cd /where/my/awesome/site/is</p>
-            <p class="fragment">git pull</p>
-            <p class="fragment">drush fra -y</p>
-            <p class="fragment">compass compile -e production --force</p>
-            <p class="fragment">drush updb -y</p>
-            <p class="fragment">drush cc all</p>
+            <p><code>ssh gitlover@savemefromftp.now</code></p>
+            <p class="fragment"><code>cd /where/my/awesome/site/is</code></p>
+            <p class="fragment"><code>git pull</code></p>
+            <p class="fragment"><code>drush fra -y</code></p>
+            <p class="fragment"><code>compass compile -e production --force</code></p>
+            <p class="fragment"><code>drush updb -y</code></p>
+            <p class="fragment"><code>drush cc all</code></p>
           </section>
           <section style="text-align: left;">
-            <p>ssh gitlover@savemefromftp.now</p>
-            <p>cd /where/my/drupal/8/site/is</p>
-            <p class="fragment">git pull</p>
-            <p class="fragment">composer update</p>
-            <p class="fragment">drush cim -y</p>
-            <p class="fragment">compass compile -e production --force</p>
-            <p class="fragment">drush updb -y</p>
-            <p class="fragment">drush cr all</p>
+            <p><code>ssh gitlover@savemefromftp.now</code></p>
+            <p><code>cd /where/my/drupal/8/site/is</code></p>
+            <p class="fragment"><code>git pull</code></p>
+            <p class="fragment"><code>composer update</code></p>
+            <p class="fragment"><code>drush cim -y</code></p>
+            <p class="fragment"><code>compass compile -e production --force</code></p>
+            <p class="fragment"><code>drush updb -y</code></p>
+            <p class="fragment"><code>drush cr all</code></p>
           </section>
           <section>
             <h2>What about...?</h2>
@@ -183,16 +158,17 @@
           <section>
             <h2>What can go wrong?</h2>
             <p class="fragment">Missed .gitignore's</p>
-            <p class="fragment">chmod -R 777 all/the/things</p>
+            <p class="fragment"><code>chmod -R 777 all/the/things</code></p>
             <p class="fragment">Need to rollback!</p>
           </section>
+          <!-- Maybe replace this with something less branded? -->
           <section data-background="images/endlessSuffering.gif" data-background-size="contain">
             &nbsp;
           </section>
           <section>
             <h2>Humans are fallible</h2>
-            <p>Even well-written "recipies" require human hands</p>
-            <p>Typos, missed steps can kill a deploy</p>
+            <p class="fragment">Good docs don't remove human hands</p>
+            <p class="fragment">Typos, missed steps can kill a deploy</p>
           </section>
           <section>
             <h2>Git alone isn't enough</h2>
@@ -208,19 +184,19 @@
           <!-- Some kind of comic here -->
           <section>
             <h2>Solves <em>some</em> problems</h2>
-            <p>Runs all steps the same each time</p>
+            <p class="fragment">Runs all steps the same each time</p>
             <small class="fragment">(Kinda.)</small>
           </section>
           <section>
             <h2>Reduces operator errors</h2>
-            <p>Just run the script, and your done...</p>
-            <p>...right?</p>
+            <p class="fragment">Just run the script, and your done!</p>
+            <p class="fragment">...right?</p>
           </section>
           <section>
             <h2>Writing scripts is painful</h2>
-            <p>Obscure UNIXisms</p>
-            <p>Odd programming conventions</p>
-            <p>Can be as complex as application code</p>
+            <p class="fragment">Obscure UNIXisms</p>
+            <p class="fragment">Odd programming conventions</p>
+            <p class="fragment">Can be as complex as application code</p>
           </section>
           <!-- COMIC
                Developer in the corner, small rubber duck appears opposite.
@@ -232,17 +208,17 @@
                Developer eaten alive by pile of ducks
              -->
           <section>
-            <h2>Scripts make the problem worse</h2>
-            <p>They are code, not configuration.</p>
-          </section>
-          <section>
             <h2>Side effects and repeatability</h2>
-            <p>Running the same script twice...</p>
-            <p>...doesn't produce the same results</p>
+            <p class="fragment">Running the same script twice...</p>
+            <p class="fragment">...doesn't produce the same results</p>
           </section>
           <section>
             <h2>No idempotence</h2>
             <p>Litters scripts with <code>if</code>s and <code>elsif</code>s</p>
+          </section>
+          <section>
+            <h2>Scripts aren't a solution</h2>
+            <p>They are code, not configuration.</p>
           </section>
         </section>
 
@@ -279,8 +255,8 @@
           </section>
           <section>
             <h2>Serverless</h2>
-            <p>No central puppetmaster server</p>
-            <p>Whatever runs ansible is the controller</p>
+            <p class="fragment">No central puppetmaster server</p>
+            <p class="fragment">Whatever runs ansible is the controller</p>
           </section>
           <section>
             <h2>Specifying targets</h2>
@@ -317,8 +293,8 @@ localhost ansible_connection=local
           </section>
           <section>
             <h2>Batteries included</h2>
-            <p>Modules provide functionality</p>
-            <p>All official modules included</p>
+            <p class="fragment">Modules provide functionality</p>
+            <p class="fragment">All official modules included</p>
           </section>
           <section>
             <pre>
@@ -338,8 +314,8 @@ localhost ansible_connection=local
           </section>
           <section>
             <h2>Idemnopent</h2>
-            <p>Playbooks describe desired end state</p>
-            <p>Leaves complex if/else logic to modules</p>
+            <p class="fragment">Playbooks describe desired end state</p>
+            <p class="fragment">Leaves complex <code>if</code>/<code>else</code> logic to modules</p>
           </section>
         </section>
 
@@ -384,6 +360,16 @@ localhost ansible_connection=local
     src: "{{ web_dir }}/"
     dest: "{{ build_dir }}"
     delete: yes
+             </pre>
+           </section>
+           <section>
+             <pre>
+- name: Symlink the files directory.
+  file:
+    src: "{{ files_dir }}"
+    dest: "{{ web_dir }}/sites/default/files"
+    state: link
+    mode: "0775"
              </pre>
            </section>
            <section>

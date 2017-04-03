@@ -16,15 +16,15 @@ body {
   font-family: "Source Code Pro", monospace;
   font-size: 40px;
   font-weight: normal;
-  color: #aaa; }
+  color: #ccc; }
 
 h1.deep-hurting {
   font-family: "Chelsea Market", sans-serif !important;
   font-size: 40px;
   font-weight: normal;
-  color: #d73400;
+  color: #d73400 !important;
   transform:rotate(-3deg);
-  text-shadow: 1px 1px 2px rgba(245, 79, 0, 0.94);
+  text-shadow: 1px 1px 20px rgba(245, 79, 0, 0.94) !important;
 }
 
 ::selection {
