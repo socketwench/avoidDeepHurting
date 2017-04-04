@@ -445,7 +445,17 @@ localhost ansible_connection=local
 <!-- CI section may be last, not first -->
         <section>
           <section>
-            <h1>Getting CI</h1>
+            <h1>But I want to be lazy</h1>
+          </section>
+          <!-- COMIC
+               This is great and all, but I'm still the one everyone slacks to deploy!
+               Can't I just be lazy?
+               Why can't the servers just do this for me?
+             -->
+          <section>
+            <h2>CI Servers</h2>
+            <p class="fragment">Monitors your repo for events</p>
+            <p class="fragment">Performs actions in response to events</p>
           </section>
           <section>
             <h2>Travis CI</h2>
@@ -454,25 +464,131 @@ localhost ansible_connection=local
           </section>
           <section>
             <h2>Self-hosted, OSS CIs</h2>
-            <p>Jenkins</p>
-            <p>Circle CI</p>
+            <p class="fragment">Jenkins</p>
+            <p class="fragment">Circle CI</p>
           </section>
           <section>
-            <h2>Gitlab Runner</h2>
-            <p>Included with Gitlab CE</p>
-            <p>Native integration with Gitlab</p>
+            <h2>Gitlab CI</h2>
+            <p class="fragment">Integrated with Gitlab CE</p>
+            <p class="fragment">Free, OSS</p>
           </section>
+          <section>
+            <h2>Runners</h2>
+            <p class="fragment">Process that executes builds</p>
+            <p class="fragment">Local or remote via SSH</p>
+          </section>
+          <section>
+            <h2>.gitlab-ci.yml</h2>
+            <p class="fragment">Gitlab CI config file</p>
+            <p class="fragment">Put in the top level of your repo</p>
+          </section>
+          <section>
+            <pre>
+stages:
+  - deploy
+
+job_live_deploy:
+  tags:
+    - live
+  stage: deploy
+  script:
+    - "ansible-playbook -i inventory/live live.yml"
+  only:
+    - master
+            </pre>
+          </section>
+          <!-- COMIC
+               Something about our directory organization
+             -->
+          <section>
+            <h2>Environment playbooks</h2>
+            <p>Allows customization per environment</p>
+            <p>Different file paths, enable/disable modules, etc.</p>
+          </section>
+          <section>
+            <h2>Inventories</h2>
+            <p>One file per environment</p>
+          </section>
+          <section>
+            <pre>
+[live]
+localhost ansible_connection=local
+            </pre>
+          </section>
+          <section>
+            <h2>What about shared hosts?</h2>
+            <p>Ansible isn't installed</p>
+            <p>CI server used as controller</p>
+          </section>
+          <section>
+            <pre>
+[live]
+example.com ansible_user=jane
+            </pre>
+          </section>
+          <section>
+            <h2>Group vars</h2>
+            <p>Defines variables for a host group</p>
+            <p>Loaded transparently, just specfy <code>-i</code></p>
+          </section>
+          <section>
+            <pre>
+---
+env_name: "live"
+base_dir: "/virtual/sites/example.com"
+git_dir: "{{ base_dir }}/git"
+build_dir: "{{ base_dir }}/wip"
+web_dir: "{{ base_dir }}/src"
+            </pre>
+          </section>
+          <!-- Something about galaxy? -->
         </section>
 
         <section>
           <section>
             <h1>Keys and credientials?</h1>
           </section>
+          <section>
+            <pre>
+---
+base_dir: "/virtual/sites/example.com"
+git_dir: "{{ base_dir }}/git"
+build_dir: "{{ base_dir }}/wip"
+web_dir: "{{ base_dir }}/src"
+            </pre>
+            <pre class="fragment">
+db_user: "{{ lookup('env', 'LIVE_DB_USER') }}"
+db_pass: "{{ lookup('env', 'LIVE_DB_PASS') }}"
+db_name: "{{ lookup('env', 'LIVE_DB_NAME') }}"
+db_host: "{{ lookup('env', 'LIVE_DB_HOST') }}"
+db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"
+            </pre>
+          </section>
         </section>
 
         <section>
           <section>
             <h1>Takeaways</h1>
+          </section>
+          <section>
+            <h2>The Repo is the Server</h2>
+            <p class="fragment">Never SSH in unless something breaks</p>
+          </section>
+          <section>
+            <h2>Everything is in the repo*</h2>
+            <p class="fragment">Use secure vars for logins and keys</p>
+          </section>
+          <section>
+            <h2>Keep branches the same</h2>
+            <p class="fragment">Separate conf files per environment</p>
+          </section>
+          <section>
+            <h2>Make CI do everything</h2>
+            <p class="fragment">Varnish ban, bounce Apache, anything needed</p>
+          </section>
+          <section>
+            <h2>CI hurts now...</h2>
+            <p class="fragment">...so it doesn't later.</p>
           </section>
         </section>
 
