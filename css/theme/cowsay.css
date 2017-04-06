@@ -156,7 +156,7 @@ h1.deep-hurting {
   width: 90%;
   margin: 20px auto;
   text-align: left;
-  font-size: 0.75em;
+  font-size: 0.7em;
   font-family: monospace;
   line-height: 1.2em;
   word-wrap: break-word;
@@ -170,8 +170,20 @@ h1.deep-hurting {
   display: block;
   padding: 5px;
   overflow: auto;
-  max-height: 400px;
+  /*max-height: 400px;*/
   word-wrap: normal; }
+
+.hljs {
+  background: none !important;
+}
+
+::-webkit-scrollbar {
+  background: #222;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+}
 
 .reveal table {
   margin: auto;

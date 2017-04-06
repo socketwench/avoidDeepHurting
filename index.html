@@ -87,9 +87,9 @@
             <h2>And then git came along...</h2>
           </section>
           <section style="text-align: left;">
-            <p>ssh gitlover@savemefromftp.now</p>
-            <p class="fragment">cd /where/my/awesome/site/is</p>
-            <p class="fragment">git pull <span class="blink_me">&block;</span></p>
+            <p><code>ssh gitlover@savemefromftp.now</code></p>
+            <p class="fragment"><code>cd /where/my/awesome/site/is</code></p>
+            <p class="fragment"><code>git pull <span class="blink_me">&block;</span></code></p>
           </section>
           <section>
             <h2>Post-pull tasks are manual</h2>
@@ -264,17 +264,15 @@
             <p class="fragment">Text file of IPs/Hostnames</p>
           </section>
           <section>
-            <pre>
-172.52.52.0
+<pre><code>172.52.52.0
 172.52.52.1
 172.52.52.2
-            </pre><pre class="fragment">
+</code></pre><pre class="fragment"><code>
 [live]
 www.example.com
-            </pre><pre class="fragment">
+</code></pre><pre class="fragment"><code>
 [self]
-localhost ansible_connection=local
-            </pre>
+localhost ansible_connection=local</code></pre>
           </section>
           <section>
             <h2>Easy to read</h2>
@@ -282,14 +280,14 @@ localhost ansible_connection=local
             <p class="fragment">Run top-down, no complex server model</p>
           </section>
           <section>
-            <pre>
----
+<pre><code>---
 - hosts: all
   vars:
     heyLook: "A variable!"
   tasks:
     - name: Make some stuff happen
-            </pre>
+      stuffDoer:
+        param: "{{ heyLook }}"</code></pre>
           </section>
           <section>
             <h2>Batteries included</h2>
@@ -297,20 +295,18 @@ localhost ansible_connection=local
             <p class="fragment">All official modules included</p>
           </section>
           <section>
-            <pre>
----
+<pre><code>---
 - hosts: all
   vars:
     git_dir: "/home/tess/git"
   tasks:
     - name: Clone repo
       git:
-        repo: git@github.com:socketwench/avoidDeepHurting.git
+        repo: git@example.com:gimmeMahStuff.git
         dest: "{{ git_dir }}"
         clone: yes
         update: yes
-        version: "develop"
-            </pre>
+        version: "develop"</code></pre>
           </section>
           <section>
             <h2>Idemnopent</h2>
@@ -344,51 +340,46 @@ localhost ansible_connection=local
              <p>"Zero downtime" deployments</p>
            </section>
            <section>
-             <pre>
+             <pre><code>
 - name: Assure the build directory exists.
   file:
     path: "{{ build_dir }}"
     state: directory
     mode: "0755"
-    group: "www-data"
-            </pre>
+    group: "www-data"</code></pre>
           </section>
           <section>
-            <pre>
+            <pre><code>
 - name: Copy web files from the repo.
   synchronize:
     src: "{{ web_dir }}/"
     dest: "{{ build_dir }}"
-    delete: yes
-             </pre>
+    delete: yes</code></pre>
            </section>
            <section>
-             <pre>
+             <pre><code>
 - name: Symlink the files directory.
   file:
     src: "{{ files_dir }}"
     dest: "{{ web_dir }}/sites/default/files"
     state: link
-    mode: "0775"
-             </pre>
+    mode: "0775"</code></pre>
            </section>
            <section>
-             <pre>
-- name: Out with the old...
+<pre><code>- name: Out with the old...
   shell: "mv {{ web_dir }} {{ web_dir }}_old"
   args:
     creates: "{{ web_dir }}_old"
     removes: "{{ web_dir }}"
-</pre><pre class="fragment">
+</code></pre><pre class="fragment"><code>
 - name: ...in with the new.
   shell: "mv {{ build_dir }} {{ web_dir }}"
   args:
     creates: "{{ web_dir }}"
-    removes: "{{ build_dir }}"
-              </pre>
+    removes: "{{ build_dir }}"</code></pre>
             </section>
             <section>
-              <h2>Capistrano style builds</h2>
+              <h2>Alternative: Capistrano style</h2>
               <p>Timestamp-named build directories</p>
               <p class="fragment"><code>current</code> symlink used as web directory</p>
             </section>
@@ -405,40 +396,31 @@ localhost ansible_connection=local
               <p class="fragment">Cache clear</p>
             </section>
             <section>
-              <pre>
-- name: Feature revert (Drupal 7)
+<pre><code>- name: Feature revert (Drupal 7)
   shell: "drush fra -y"
   args:
-    chdir: "{{ web_dir }}"
-              </pre>
-              <pre class="fragment">
+    chdir: "{{ web_dir }}"</code></pre><pre class="fragment"><code>
 - name: Config sync import (Drupal 8)
-  shell: "drush cex -y"
+  shell: "drush cim -y"
   args:
-    chdir: "{{ web_dir }}"
-              </pre>
+    chdir: "{{ web_dir }}"</code></pre>
             </section>
             <section>
-              <pre>
-- name: Update database
+<pre><code>- name: Update database
   shell: "drush updb -y"
   args:
-    chdir: "{{ web_dir }}"
-              </pre>
+    chdir: "{{ web_dir }}"</code></pre>
             </section>
             <section>
-              <pre>
-- name: Clear cache (Drupal 7)
+<pre><code>- name: Clear cache (Drupal 7)
   shell: "drush cc all"
   args:
     chdir: "{{ web_dir }}"
-              </pre>
-              <pre class="fragment">
+</code></pre><pre class="fragment"><code>
 - name: Clear rebuild (Drupal 8)
   shell: "drush cr all"
   args:
-    chdir: "{{ web_dir }}"
-              </pre>
+    chdir: "{{ web_dir }}"</code></pre>
             </section>
         </section>
 
@@ -466,11 +448,12 @@ localhost ansible_connection=local
             <h2>Self-hosted, OSS CIs</h2>
             <p class="fragment">Jenkins</p>
             <p class="fragment">Circle CI</p>
+            <p class="fragment">Many others!</p>
           </section>
           <section>
             <h2>Gitlab CI</h2>
             <p class="fragment">Integrated with Gitlab CE</p>
-            <p class="fragment">Free, OSS</p>
+            <p class="fragment">Free and OSS</p>
           </section>
           <section>
             <h2>Runners</h2>
@@ -483,8 +466,7 @@ localhost ansible_connection=local
             <p class="fragment">Put in the top level of your repo</p>
           </section>
           <section>
-            <pre>
-stages:
+<pre><code>stages:
   - deploy
 
 job_live_deploy:
@@ -494,8 +476,7 @@ job_live_deploy:
   script:
     - "ansible-playbook -i inventory/live live.yml"
   only:
-    - master
-            </pre>
+    - master</code></pre>
           </section>
           <!-- COMIC
                Something about our directory organization
@@ -510,10 +491,10 @@ job_live_deploy:
             <p>One file per environment</p>
           </section>
           <section>
-            <pre>
+            <pre><code>
 [live]
 localhost ansible_connection=local
-            </pre>
+            </code></pre>
           </section>
           <section>
             <h2>What about shared hosts?</h2>
@@ -521,10 +502,10 @@ localhost ansible_connection=local
             <p>CI server used as controller</p>
           </section>
           <section>
-            <pre>
+            <pre><code>
 [live]
 example.com ansible_user=jane
-            </pre>
+            </code></pre>
           </section>
           <section>
             <h2>Group vars</h2>
@@ -532,14 +513,14 @@ example.com ansible_user=jane
             <p>Loaded transparently, just specfy <code>-i</code></p>
           </section>
           <section>
-            <pre>
+            <pre><code>
 ---
 env_name: "live"
 base_dir: "/virtual/sites/example.com"
 git_dir: "{{ base_dir }}/git"
 build_dir: "{{ base_dir }}/wip"
 web_dir: "{{ base_dir }}/src"
-            </pre>
+            </code></pre>
           </section>
           <!-- Something about galaxy? -->
         </section>
@@ -549,20 +530,144 @@ web_dir: "{{ base_dir }}/src"
             <h1>Keys and credientials?</h1>
           </section>
           <section>
-            <pre>
----
+            <h2>Old axiom holds true</h2>
+            <p class="fragment">Never put your DB login in the repo!</p>
+          </section>
+          <section>
+            <h2>Other stuff to keep out</h2>
+            <p>API keys</p>
+            <p>Cloud identity keys (IAM)</p>
+            <p>Hash salts<span class="fragment">?</span></p>
+          </section>
+          <section>
+            <h2>Not so secret "secrets"</h2>
+            <p>Server username and group</p>
+            <p>Varnish key</p>
+          </section>
+          <section>
+            <h2>Gitlab secure variables</h2>
+            <p>Unique per-repository</p>
+            <p>Stored encrypted on Gitlab server</p>
+            <p>Easy to define and edit</p>
+          </section>
+          <section>
+            <h2>Getting it to Ansible</h2>
+            <p>Exposed as environment variables</p>
+            <p>Use to set your ansible variable</p>
+          </section>
+          <section data-transition=none>
+<pre><code>---
+env_name: "live"
 base_dir: "/virtual/sites/example.com"
 git_dir: "{{ base_dir }}/git"
 build_dir: "{{ base_dir }}/wip"
 web_dir: "{{ base_dir }}/src"
-            </pre>
-            <pre class="fragment">
+
+
+
+
+
+
+</code></pre>
+          </section>
+          <section data-transition="none">
+<pre><code>---
+env_name: "live"
+base_dir: "/virtual/sites/example.com"
+git_dir: "{{ base_dir }}/git"
+build_dir: "{{ base_dir }}/wip"
+web_dir: "{{ base_dir }}/src"
+
 db_user: "{{ lookup('env', 'LIVE_DB_USER') }}"
 db_pass: "{{ lookup('env', 'LIVE_DB_PASS') }}"
 db_name: "{{ lookup('env', 'LIVE_DB_NAME') }}"
 db_host: "{{ lookup('env', 'LIVE_DB_HOST') }}"
-db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"
-            </pre>
+db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"</code></pre>
+          </section>
+          <!-- COMIC
+                Whoa! By environment variables are super mega insecure!
+              -->
+          <section>
+            <h2>Gitlab CI env vars</h2>
+            <p>Only set during the build</p>
+            <p>Only for build's shell session</p>
+          </section>
+          <section>
+            <h2>Alternative: Ansible Vault</h2>
+            <p>Encrypted var file</p>
+            <p>Store password in text file on server</p>
+            <p><a href="http://docs.ansible.com/ansible/playbooks_vault.html">Vault on docs.ansible.com</a></p>
+          </section>
+          <!-- COMIC
+               So what about settings.php?
+          -->
+          <section>
+            <h2>Ansible Templates</h2>
+            <p>Replace placeholders with ansible vars</p>
+            <p>Twig-like syntax</p>
+          </section>
+          <section>
+            <pre><code>
+$databases['default']['default'] = array(
+  'database' => '{{ db_name }}',
+  'username' => '{{ db_user }}',
+  'password' => '{{ db_pass }}',
+  'host' => '{{ db_host | default('127.0.0.1') }}',
+  'port' => '{{ db_port | default('3306') }}',
+  'driver' => 'mysql',
+  'prefix' => '',
+);
+            </code></pre>
+          </section>
+          <!-- COMIC
+              The DBs are different per environment
+              but
+              What about memcache? Varnish? Config overrides?
+            -->
+          <section>
+            <h2>Updating settings.php</h2>
+            <p>Break up into per-env files</p>
+            <p>Conditionally <code>include</code> file</p>
+          </section>
+          <section data-transition="none">
+            <pre><code>
+if (file_exists(__DIR__ . '/settings.local.php')) {
+  include __DIR__ . '/settings.local.php';
+}
+
+
+
+
+
+
+
+
+
+</code></pre>
+          </section>
+          <section data-transition="none">
+            <pre><code>
+if (file_exists(__DIR__ . '/settings.local.php')) {
+  include __DIR__ . '/settings.local.php';
+}
+elseif (strpos(__FILE__, '/stage/')) {
+  include dirname(__FILE__) . '/settings.stage.php';
+}
+elseif (strpos(__FILE__, '/live/')) {
+  include dirname(__FILE__) . '/settings.live.php';
+}
+else {
+  die ('No settings.*.php file for environment!');
+}</code></pre>
+          </section>
+          <section>
+            <pre><code>
+- name: Create settings.ENVIRONMENT.php
+  template:
+    src: "{{ git_dir }}/sites/default/settings.{{ env_name }}.php"
+    dest: "{{ build_dir }}/sites/default/settings.{{ env_name }}.php"
+    mode: "0755"</code></pre>
+            <small class="fragment">(Scroll right.)</small>
           </section>
         </section>
 
