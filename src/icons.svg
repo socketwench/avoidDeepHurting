@@ -86,9 +86,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.48740235"
-     inkscape:cx="437.53082"
-     inkscape:cy="327.87765"
+     inkscape:zoom="0.31890583"
+     inkscape:cx="510.63668"
+     inkscape:cy="480.90041"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -106,7 +106,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
         <cc:license
            rdf:resource="http://creativecommons.org/licenses/by-nc-sa/4.0/" />
       </cc:Work>
@@ -492,7 +492,7 @@
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#00ff00;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
-       d="M 160.1084,663.09419 139.87681,629.93338"
+       d="M 160.10838,663.0942 139.8768,629.93339"
        id="path6825"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
@@ -608,7 +608,47 @@
            y="359.92172"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;font-family:'Share Tech Mono';-inkscape-font-specification:'Share Tech Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr;text-anchor:middle;" /></flowRegion><flowPara
          id="flowPara8417"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;font-family:'Share Tech Mono';-inkscape-font-specification:'Share Tech Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr;text-anchor:middle;fill:#00ff00;fill-opacity:1;">{{}}</flowPara></flowRoot>  </g>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.66666667px;font-family:'Share Tech Mono';-inkscape-font-specification:'Share Tech Mono, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr;text-anchor:middle;fill:#00ff00;fill-opacity:1;">{{}}</flowPara></flowRoot>    <g
+       id="g5382"
+       transform="translate(-951.72677,-309.1719)">
+      <g
+         style="stroke-width:10.5038681;stroke-miterlimit:4;stroke-dasharray:none"
+         transform="matrix(0.44921154,0,0,0.57391562,587.44798,644.94969)"
+         id="g5377">
+        <path
+           style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#00ff00;stroke-width:10.5038681;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 180.18359,-295.0455 24.02735,162.49472 H 474.60938 L 498.63672,-295.0455 H 317.19697 v 8.84766 c 0,5.2206 -4.20322,5.93899 -9.42383,5.93899 h -74.36865 c -5.22061,0 -6.97953,-1.08159 -9.42383,-5.93899 v -8.84766 z"
+           id="rect5324"
+           transform="translate(0,258.66137)"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cccccsssscc" />
+        <path
+           style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#00ff00;stroke-width:10.5038681;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+           d="m 483.25391,-295.0455 v -39.63809 H 317.19697 v -12.29102 c 0,-5.22061 -4.20322,-5.939 -9.42383,-5.939 h -74.36865 c -5.22061,0 -7.60445,0.91637 -9.42383,5.939 v 12.29102 h -28.4123 v 39.63809"
+           id="rect5349"
+           transform="translate(0,258.66137)"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cccssssccc" />
+      </g>
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot7724-8-9"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(-25.63898,-29.253522)"
+       inkscape:export-filename="/Users/tess/projects/rideTheWhale/images/dockerfile.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><flowRegion
+         id="flowRegion7726-0-0"
+         style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-opacity:1"><rect
+           id="rect7728-3-4"
+           width="297.75259"
+           height="45.378021"
+           x="-334.77087"
+           y="449.22137"
+           style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-opacity:1" /></flowRegion><flowPara
+         id="flowPara7730-5-4"
+         style="font-size:30px;line-height:1.25;fill:#00ff00;fill-opacity:1;stroke:none;stroke-opacity:1">dIRECTORY</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
