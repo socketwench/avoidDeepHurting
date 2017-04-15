@@ -71,7 +71,8 @@
 
         <section>
           <section>
-            <h1>Deploying Drupal: A history</h1>
+            <h1>Deploying Drupal</h1>
+            <h2>A history</h2>
           </section>
           <section>
             <h2>Remember...</h2>
@@ -86,44 +87,34 @@
           <section>
             <h2>And then git came along...</h2>
           </section>
-          <section style="text-align: left;">
-            <p><code>ssh gitlover@savemefromftp.now</code></p>
-            <p class="fragment"><code>cd /where/my/awesome/site/is</code></p>
-            <p class="fragment"><code>git pull <span class="blink_me">&block;</span></code></p>
-          </section>
-          <section>
-            <h2>Post-pull tasks are manual</h2>
-            <p>Updating the database, clearing cache</p>
-            <p>Could be done through web UI, but not recommended</p>
-          </section>
-          <section>
-            <pre style="font-size:1em;">
-      ___________________
-    /                     \
-    |  But that wasn't    |
-    |  the whole story... |
-    \                     /
-      -------------------
-             \   ^__^
-              \  (><)\_______
-                 (__)\       )\/\
-                     ||----w |
-                     ||     ||
-            </pre>
-          </section>
-          <section style="text-align: left;">
+          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/justPullAndDone1.png" data-background-size="contain">
             <p><code>ssh gitlover@savemefromftp.now</code></p>
             <p class="fragment"><code>cd /where/my/awesome/site/is</code></p>
             <p class="fragment"><code>git pull</code></p>
-            <p class="fragment"><code>drush fra -y</code></p>
-            <p class="fragment"><code>compass compile -e production --force</code></p>
-            <p class="fragment"><code>drush updb -y</code></p>
-            <p class="fragment"><code>drush cc all</code></p>
+          </section>
+          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/justPullAndDone2.png" data-background-size="contain">
+            <p><code>ssh gitlover@savemefromftp.now</code></p>
+            <p><code>cd /where/my/awesome/site/is</code></p>
+            <p><code>git pull</code></p>
+          </section>
+          <section style="text-align: left;" data-transition="none" data-background-transition="none" data-background="images/justPullAndDone3.png" data-background-size="contain">
+            <p><code>ssh gitlover@savemefromftp.now</code></p>
+            <p><code>cd /where/my/awesome/site/is</code></p>
+            <p><code>git pull</code></p>
+          </section>
+          <section>
+            <h2>Post-pull tasks</h2>
+            <p class="fragment">Updating the database</p>
+            <p class="fragment">Clearing rebuild</p>
+            <p class="fragment">Done via web UI, but not recommended</p>
+          </section>
+          <section>
+            <img src="images/andIfItStayedThatWay.png" />
           </section>
           <section style="text-align: left;">
             <p><code>ssh gitlover@savemefromftp.now</code></p>
             <p><code>cd /where/my/drupal/8/site/is</code></p>
-            <p class="fragment"><code>git pull</code></p>
+            <p><code>git pull</code></p>
             <p class="fragment"><code>composer update</code></p>
             <p class="fragment"><code>drush cim -y</code></p>
             <p class="fragment"><code>compass compile -e production --force</code></p>
@@ -131,38 +122,38 @@
             <p class="fragment"><code>drush cr all</code></p>
           </section>
           <section>
+            <img src="images/writeAllThisDown.png" />
+          </section>
+          <section>
             <h2>What about...?</h2>
-            <p class="fragment">Grunt tasks</p>
+            <p class="fragment">Grunt/Gulp tasks</p>
             <p class="fragment">Third party integrations</p>
             <p class="fragment">Clearing opcache</p>
             <p class="fragment">Varnish ban</p>
           </section>
-          <section data-background="images/deepHurting.gif" data-background-size="contain">
-            &nbsp;
+          <section data-transition="none">
+            <img src="images/badDeploy1.png" />
           </section>
-          <section>
-            <pre style="font-size:1em;">
-      ___________________
-    /                     \
-    |  And that's when    |
-    |  things go well...  |
-    \                     /
-      -------------------
-             \   ^__^
-              \  (XX)\_______
-                 (__)\       )\/\
-                     ||----w |
-                     ||     ||
-            </pre>
+          <section data-transition="none">
+            <img src="images/badDeploy2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/badDeploy3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/badDeploy4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/badDeploy5.png" />
           </section>
           <section>
             <h2>What can go wrong?</h2>
-            <p class="fragment">Missed .gitignore's</p>
+            <p class="fragment">Missed deployment steps</p>
+            <p class="fragment">Forgot to .gitignore</p>
             <p class="fragment"><code>chmod -R 777 all/the/things</code></p>
             <p class="fragment">Need to rollback!</p>
           </section>
-          <!-- Maybe replace this with something less branded? -->
-          <section data-background="images/endlessSuffering.gif" data-background-size="contain">
+          <section data-background="images/deepHurting.gif" data-background-size="contain">
             &nbsp;
           </section>
           <section>
@@ -178,47 +169,47 @@
         </section>
 
         <section>
-          <section>
+          <section data-background-transition="none" data-background="images/aTribbleAndATribble1.png" data-background-size="contain">
             <h1>So let's use a script!</h1>
           </section>
-          <!-- Some kind of comic here -->
-          <section>
-            <h2>Solves <em>some</em> problems</h2>
-            <p class="fragment">Runs all steps the same each time</p>
-            <small class="fragment">(Kinda.)</small>
+          <section data-background-transition="none" data-background="images/aTribbleAndATribble2.png" data-background-size="contain">
+            &nbsp;
           </section>
-          <section>
-            <h2>Reduces operator errors</h2>
+          <section data-background-transition="none" data-background="images/aTribbleAndATribble3.png" data-background-size="contain">
+            <h2>Solves <em>some</em> problems</h2>
             <p class="fragment">Just run the script, and your done!</p>
             <p class="fragment">...right?</p>
           </section>
-          <section>
+          <section data-background-transition="none" data-background="images/aTribbleAndATribble4.png" data-background-size="contain">
+            <h2>Reduces operator errors</h2>
+            <p class="fragment">Runs all steps the same each time</p>
+            <small class="fragment">(Kinda.)</small>
+          </section>
+          <section data-background-transition="none" data-background="images/aTribbleAndATribble5.png" data-background-size="contain">
             <h2>Writing scripts is painful</h2>
             <p class="fragment">Obscure UNIXisms</p>
             <p class="fragment">Odd programming conventions</p>
-            <p class="fragment">Can be as complex as application code</p>
           </section>
-          <!-- COMIC
-               Developer in the corner, small rubber duck appears opposite.
-               "Awww, it's just a little script."
-               More ducks appear.
-               Developer gets nervous.
-               Even more ducks appear.
-               "Ummmm..."
-               Developer eaten alive by pile of ducks
-             -->
-          <section>
-            <h2>Side effects and repeatability</h2>
-            <p class="fragment">Running the same script twice...</p>
-            <p class="fragment">...doesn't produce the same results</p>
+          <section data-background-transition="none" data-background="images/aTribbleAndATribble6.png" data-background-size="contain">
+            <h2>Repeatability adds complexity</h2>
+            <p class="fragment">Need to check state first</p>
+            <p class="fragment">Litters scripts with <code>if</code>s and <code>elsif</code>s</p>
+            <p>&nbsp;</p>
           </section>
-          <section>
-            <h2>No idempotence</h2>
-            <p>Litters scripts with <code>if</code>s and <code>elsif</code>s</p>
+          <section data-background="images/tribbles.gif" data-background-size="contain">
+            &nbsp;
           </section>
-          <section>
-            <h2>Scripts aren't a solution</h2>
-            <p>They are code, not configuration.</p>
+          <section data-transition="none" data-background-transition="none" data-background="images/aTribbleAndATribble7.png" data-background-size="contain">
+            <h2>Scripts are tribbles</h2>
+            <p class="fragment">They start small...</p>
+            <p class="fragment">...but quickly become a big problem.</p>
+            <p>&nbsp;</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/aTribbleAndATribble8.png" data-background-size="contain">
+            <h2>Scripts are tribbles</h2>
+            <p>They start small...</p>
+            <p>...but quickly become a big problem.</p>
+            <p>&nbsp;</p>
           </section>
         </section>
 
