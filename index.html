@@ -105,7 +105,7 @@
           <section>
             <h2>Post-pull tasks</h2>
             <p class="fragment">Updating the database</p>
-            <p class="fragment">Clearing rebuild</p>
+            <p class="fragment">Cache clear</p>
             <p class="fragment">Done via web UI, but not recommended</p>
           </section>
           <section>
@@ -345,8 +345,22 @@ localhost ansible_connection=local</code></pre>
         </section>
 
         <section>
-          <section>
+          <section data-background-transition="none" data-background="images/fixingGitDeploy1.png" data-background-size="contain">
             <h1>Fixing git deploy</h1>
+          </section>
+          <section data-background-transition="none" data-background="images/fixingGitDeploy2.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-background-transition="none" data-background="images/fixingGitDeploy3.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section data-background-transition="none" data-background="images/fixingGitDeploy4.png" data-background-size="contain">
+            &nbsp;
+          </section>
+          <section>
+            <h2>Git deploy is like hook_menu()</h2>
+            <p class="fragment">It should do one thing well...</p>
+            <p class="fragment">...not several things okay.</p>
           </section>
           <!-- COMIC
             Ends on realization that throwing the web directory away is the
@@ -383,14 +397,19 @@ localhost ansible_connection=local</code></pre>
              <img src="images/threeDirectories10.png" />
            </section>
            <section>
-             <h2>No more .gitignore hell</h2>
-             <p class="fragment">"Artefacts" no longer in repo</p>
+             <h2>Ready before Go-live</h2>
+             <p class="fragment"><em>Artefacts</em> created before switchover</p>
              <p class="fragment">Generated assets, compiled SASS, etc.</p>
            </section>
            <section>
-             <h2>Ready before Go-live</h2>
-             <p class="fragment">Key assets created before switchover</p>
-             <p class="fragment">"Zero downtime" deployments</p>
+             <h2>No more .gitignore hell</h2>
+             <p class="fragment">Git directory only mirrors the repo</p>
+             <p class="fragment">No more <code>git clean -df</code></p>
+           </section>
+           <section>
+             <h2>"Zero" downtime</h2>
+             <p class="fragment">Directory move is fast &amp; last</p>
+             <p class="fragment">Build failures won't break live</p>
            </section>
            <section>
              <pre><code class="yaml">
@@ -401,23 +420,22 @@ localhost ansible_connection=local</code></pre>
     mode: "0755"
     group: "www-data"</code></pre>
           </section>
-          <section>
+          <section data-transition="none" data-background-transition="none" data-background="images/trailingSlash1.png" data-background-size="contain">
             <pre><code class="yaml">
 - name: Copy web files from the repo.
   synchronize:
-    src: "{{ web_dir }}/"
+    src: "{{ git_dir }}/docroot/"
     dest: "{{ build_dir }}"
     delete: yes</code></pre>
            </section>
-           <section>
+           <section data-transition="none" data-background-transition="none" data-background="images/trailingSlash2.png" data-background-size="contain">
              <pre><code class="yaml">
-- name: Symlink the files directory.
-  file:
-    src: "{{ files_dir }}"
-    dest: "{{ web_dir }}/sites/default/files"
-    state: link
-    mode: "0775"</code></pre>
-           </section>
+- name: Copy web files from the repo.
+  synchronize:
+    src: "{{ git_dir }}/docroot/"
+    dest: "{{ build_dir }}"
+    delete: yes</code></pre>
+            </section>
            <section>
 <pre><code class="yaml">- name: Out with the old...
   shell: "mv {{ web_dir }} {{ web_dir }}_old"
@@ -431,11 +449,16 @@ localhost ansible_connection=local</code></pre>
     creates: "{{ web_dir }}"
     removes: "{{ build_dir }}"</code></pre>
             </section>
-            <section>
+            <!-- <section>
               <h2>Alternative: Capistrano style</h2>
               <p>Timestamp-named build directories</p>
               <p class="fragment"><code>current</code> symlink used as web directory</p>
             </section>
+            <section>
+              <h2>Problems</h2>
+              <p class="fragment">OpCache refresh must be forced</p>
+              <p class="fragment">Autoloaders can become confused</p>
+            </section> -->
             <section data-transition="none">
               <img src="images/wheresTheFileDir1.png" />
             </section>
@@ -471,53 +494,93 @@ localhost ansible_connection=local</code></pre>
     dest: "{{ web_dir }}/sites/default/files"
     state: link
     mode: "0755"
-    group: "www-data"</code></pre>
+    group: "www-data"
+
+# Now swap build/ and web/ </code></pre>
             </section>
             <!-- COMIC? -->
             <section>
-              <h2>Problems</h2>
-              <p class="fragment">OpCache refresh must be forced</p>
-              <p class="fragment">Autoloaders can become confused</p>
-            </section>
-            <section>
               <h2>Post Go-live Tasks</h2>
-              <p class="fragment">Feature revert or Config Sync import</p>
+              <p class="fragment">Config Sync import</p>
               <p class="fragment">Database update</p>
-              <p class="fragment">Cache clear</p>
+              <p class="fragment">Cache rebuild</p>
             </section>
-            <section>
-<pre><code class="yaml">- name: Feature revert (Drupal 7)
-  shell: "drush fra -y"
-  args:
-    chdir: "{{ web_dir }}"</code></pre><pre class="fragment"><code class="yaml">
-- name: Config sync import (Drupal 8)
+            <section data-transition="none" data-background-transition="none" data-background="images/postGoLiveTasks1.png" data-background-size="contain">
+<pre><code class="yaml">- name: Config sync import
   shell: "drush cim -y"
   args:
-    chdir: "{{ web_dir }}"</code></pre>
-            </section>
-            <section>
-<pre><code class="yaml">- name: Update database
+    chdir: "{{ web_dir }}"
+- name: Update database
   shell: "drush updb -y"
   args:
-    chdir: "{{ web_dir }}"</code></pre>
-            </section>
-            <section>
-<pre><code class="yaml">- name: Clear cache (Drupal 7)
-  shell: "drush cc all"
-  args:
     chdir: "{{ web_dir }}"
-</code></pre><pre class="fragment"><code class="yaml">
-- name: Clear rebuild (Drupal 8)
+- name: Clear rebuild
   shell: "drush cr all"
   args:
     chdir: "{{ web_dir }}"</code></pre>
             </section>
+            <section data-transition="none" data-background-transition="none" data-background="images/postGoLiveTasks2.png" data-background-size="contain">
+<pre><code class="yaml">- name: Config sync import
+  shell: "drush cim -y"
+  args:
+    chdir: "{{ web_dir }}"
+- name: Update database
+  shell: "drush updb -y"
+  args:
+    chdir: "{{ web_dir }}"
+- name: Clear rebuild
+  shell: "drush cr all"
+  args:
+    chdir: "{{ web_dir }}"</code></pre>
+            </section>
+            <section data-transition="none">
+              <h2>Creating a restore point</h2>
+              <p class="fragment">Keep the last site build</p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
+            </section>
+            <section data-transition="none">
+              <h2>Creating a restore point</h2>
+              <p><strike>Keep the last site build</strike></p>
+              <p class="fragment">Archive <code>sync</code> directory</p>
+              <p class="fragment">Create database dump</p>
+            </section>
+            <section>
+<pre><code class="yaml"># start of the deploy
+
+- name: Generate a timestamp
+  set_fact:
+    timestamp: "{{ lookup('pipe', 'date -I') }}"
+
+</code></pre><pre class="fragment"><code class="yaml">- name: Config sync backup
+  archive:
+    src: "{{ sync_dir }}"
+    dest: "{{ backup_dir }}/sync_{{ timestamp }}.tgz"</code></pre>
+            </section>
+            <section>
+              <pre><code class="yaml">- name: backup database
+  mysql_db:
+    state: dump
+    name: "{{ db_name }}"
+    target: "{{ backup_dir }}/db_{{ timestamp }}.tgz"
+    login_host: "{{ db_host }}"
+    login_port: "{{ db_port | int }}"
+    login_user: "{{ db_user }}"
+    login_password: "{{ db_password }}"
+
+# Rest of the deploy</code></pre>
+            </section>
+            <section data-transition="none">
+              <img src="images/cantIBeLazy1.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/cantIBeLazy2.png" />
+            </section>
         </section>
 
-<!-- CI section may be last, not first -->
         <section>
           <section>
-            <h1>But I want to be lazy</h1>
+            <h1>I want to be lazy</h1>
           </section>
           <!-- COMIC
                This is great and all, but I'm still the one everyone slacks to deploy!
