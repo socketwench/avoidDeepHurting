@@ -86,8 +86,8 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.31890583"
-     inkscape:cx="510.63668"
+     inkscape:zoom="0.83463635"
+     inkscape:cx="266.21886"
      inkscape:cy="480.90041"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -279,17 +279,20 @@
            id="rect5320-2"
            style="fill:#00ff00;fill-opacity:1" /></flowRegion><flowPara
          id="flowPara14506"
-         style="font-size:30px;line-height:1.25;fill:#00ff00;fill-opacity:1">Ansible</flowPara></flowRoot>    <path
-       style="display:inline;fill:none;fill-opacity:1;stroke:#00ff00;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 212.8684,600.48978 2.4e-4,108.41332 H 105.87329 V 572.07668 h 79.49811"
-       id="rect7628"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccc" />
-    <path
-       style="display:inline;fill:none;fill-opacity:1;stroke:#00ff00;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 185.37282,572.07639 v 28.41211 h 27.49609 z"
-       id="rect7628-7"
-       inkscape:connector-curvature="0" />
+         style="font-size:30px;line-height:1.25;fill:#00ff00;fill-opacity:1">Ansible</flowPara></flowRoot>    <g
+       id="g10502">
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="rect7628"
+         d="m 212.8684,600.48978 2.4e-4,108.41332 H 105.87329 V 572.07668 h 79.49811"
+         style="display:inline;fill:none;fill-opacity:1;stroke:#00ff00;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="rect7628-7"
+         d="m 185.37282,572.07639 v 28.41211 h 27.49609 z"
+         style="display:inline;fill:none;fill-opacity:1;stroke:#00ff00;stroke-width:4;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </g>
     <flowRoot
        xml:space="preserve"
        id="flowRoot7724"

@@ -259,12 +259,13 @@
           <section data-transition="none">
             <img src="images/ansibleProcess10.png" />
           </section>
-          <section>
+          <section data-background="images/anyKindOfGemAnyKindOfSnake.png" data-background-size="contain">
             <h2>Less dependencies</h2>
             <p>Python 2</p>
             <p>Works on (most) shared hosts</p>
           </section>
           <section>
+            <h2>Installation</h2>
             <p><code>apt-get install ansible</code></p>
             <p class="fragment"><code>brew install ansible</code></p>
             <p class="fragment"><code>pip install ansible</code></p>
@@ -291,7 +292,7 @@
             <p class="fragment">Text file of IPs/Hostnames</p>
           </section>
           <section>
-<pre><code>172.52.52.0
+<pre><code class="ini">172.52.52.0
 172.52.52.1
 172.52.52.2
 </code></pre><pre class="fragment"><code>
@@ -307,7 +308,7 @@ localhost ansible_connection=local</code></pre>
             <p class="fragment">Run top-down, no complex server model</p>
           </section>
           <section>
-<pre><code>---
+<pre><code class="yaml">---
 - hosts: all
   vars:
     heyLook: "A variable!"
@@ -319,10 +320,11 @@ localhost ansible_connection=local</code></pre>
           <section>
             <h2>Batteries included</h2>
             <p class="fragment">Modules provide functionality</p>
-            <p class="fragment">All official modules included</p>
+            <p class="fragment">No downloading, all built in.</p>
+            <p class="fragment"><a href="http://docs.ansible.com/ansible/list_of_all_modules.html">http://docs.ansible.com/</a></p>
           </section>
           <section>
-<pre><code>---
+<pre><code class="yaml">---
 - hosts: all
   vars:
     git_dir: "/home/tess/git"
@@ -382,16 +384,16 @@ localhost ansible_connection=local</code></pre>
            </section>
            <section>
              <h2>No more .gitignore hell</h2>
-             <p>"Artefacts" no longer in repo</p>
-             <p>File directory, compiled SASS, etc.</p>
+             <p class="fragment">"Artefacts" no longer in repo</p>
+             <p class="fragment">Generated assets, compiled SASS, etc.</p>
            </section>
            <section>
              <h2>Ready before Go-live</h2>
-             <p>Key assets created before switchover</p>
-             <p>"Zero downtime" deployments</p>
+             <p class="fragment">Key assets created before switchover</p>
+             <p class="fragment">"Zero downtime" deployments</p>
            </section>
            <section>
-             <pre><code>
+             <pre><code class="yaml">
 - name: Assure the build directory exists.
   file:
     path: "{{ build_dir }}"
@@ -400,7 +402,7 @@ localhost ansible_connection=local</code></pre>
     group: "www-data"</code></pre>
           </section>
           <section>
-            <pre><code>
+            <pre><code class="yaml">
 - name: Copy web files from the repo.
   synchronize:
     src: "{{ web_dir }}/"
@@ -408,7 +410,7 @@ localhost ansible_connection=local</code></pre>
     delete: yes</code></pre>
            </section>
            <section>
-             <pre><code>
+             <pre><code class="yaml">
 - name: Symlink the files directory.
   file:
     src: "{{ files_dir }}"
@@ -417,12 +419,12 @@ localhost ansible_connection=local</code></pre>
     mode: "0775"</code></pre>
            </section>
            <section>
-<pre><code>- name: Out with the old...
+<pre><code class="yaml">- name: Out with the old...
   shell: "mv {{ web_dir }} {{ web_dir }}_old"
   args:
     creates: "{{ web_dir }}_old"
     removes: "{{ web_dir }}"
-</code></pre><pre class="fragment"><code>
+</code></pre><pre class="fragment"><code class="yaml">
 - name: ...in with the new.
   shell: "mv {{ build_dir }} {{ web_dir }}"
   args:
@@ -433,6 +435,43 @@ localhost ansible_connection=local</code></pre>
               <h2>Alternative: Capistrano style</h2>
               <p>Timestamp-named build directories</p>
               <p class="fragment"><code>current</code> symlink used as web directory</p>
+            </section>
+            <section data-transition="none">
+              <img src="images/wheresTheFileDir1.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/wheresTheFileDir2.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/filesSymlink1.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/filesSymlink2.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/filesSymlink3.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/filesSymlink4.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/filesSymlink5.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/filesSymlink6.png" />
+            </section>
+            <section data-transition="none">
+              <img src="images/filesSymlink7.png" />
+            </section>
+            <section>
+              <pre><code class="yaml">
+- name: Symlink the files dir.
+  file:
+    src: "{{ files_dir }}"
+    dest: "{{ web_dir }}/sites/default/files"
+    state: link
+    mode: "0755"
+    group: "www-data"</code></pre>
             </section>
             <!-- COMIC? -->
             <section>
@@ -447,27 +486,27 @@ localhost ansible_connection=local</code></pre>
               <p class="fragment">Cache clear</p>
             </section>
             <section>
-<pre><code>- name: Feature revert (Drupal 7)
+<pre><code class="yaml">- name: Feature revert (Drupal 7)
   shell: "drush fra -y"
   args:
-    chdir: "{{ web_dir }}"</code></pre><pre class="fragment"><code>
+    chdir: "{{ web_dir }}"</code></pre><pre class="fragment"><code class="yaml">
 - name: Config sync import (Drupal 8)
   shell: "drush cim -y"
   args:
     chdir: "{{ web_dir }}"</code></pre>
             </section>
             <section>
-<pre><code>- name: Update database
+<pre><code class="yaml">- name: Update database
   shell: "drush updb -y"
   args:
     chdir: "{{ web_dir }}"</code></pre>
             </section>
             <section>
-<pre><code>- name: Clear cache (Drupal 7)
+<pre><code class="yaml">- name: Clear cache (Drupal 7)
   shell: "drush cc all"
   args:
     chdir: "{{ web_dir }}"
-</code></pre><pre class="fragment"><code>
+</code></pre><pre class="fragment"><code class="yaml">
 - name: Clear rebuild (Drupal 8)
   shell: "drush cr all"
   args:
@@ -517,7 +556,7 @@ localhost ansible_connection=local</code></pre>
             <p class="fragment">Put in the top level of your repo</p>
           </section>
           <section>
-<pre><code>stages:
+<pre><code class="yaml">stages:
   - deploy
 
 job_live_deploy:
@@ -542,7 +581,7 @@ job_live_deploy:
             <p>One file per environment</p>
           </section>
           <section>
-            <pre><code>
+            <pre><code class="ini">
 [live]
 localhost ansible_connection=local
             </code></pre>
@@ -553,7 +592,7 @@ localhost ansible_connection=local
             <p>CI server used as controller</p>
           </section>
           <section>
-            <pre><code>
+            <pre><code class="ini">
 [live]
 example.com ansible_user=jane
             </code></pre>
@@ -564,7 +603,7 @@ example.com ansible_user=jane
             <p>Loaded transparently, just specfy <code>-i</code></p>
           </section>
           <section>
-            <pre><code>
+            <pre><code class="yaml">
 ---
 env_name: "live"
 base_dir: "/virtual/sites/example.com"
@@ -607,7 +646,7 @@ web_dir: "{{ base_dir }}/src"
             <p>Use to set your ansible variable</p>
           </section>
           <section data-transition=none>
-<pre><code>---
+<pre><code class="yaml">---
 env_name: "live"
 base_dir: "/virtual/sites/example.com"
 git_dir: "{{ base_dir }}/git"
@@ -622,7 +661,7 @@ web_dir: "{{ base_dir }}/src"
 </code></pre>
           </section>
           <section data-transition="none">
-<pre><code>---
+<pre><code class="yaml">---
 env_name: "live"
 base_dir: "/virtual/sites/example.com"
 git_dir: "{{ base_dir }}/git"
@@ -658,7 +697,7 @@ db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"</code></pre>
             <p>Twig-like syntax</p>
           </section>
           <section>
-            <pre><code>
+            <pre><code class="php">
 $databases['default']['default'] = array(
   'database' => '{{ db_name }}',
   'username' => '{{ db_user }}',
@@ -681,7 +720,7 @@ $databases['default']['default'] = array(
             <p>Conditionally <code>include</code> file</p>
           </section>
           <section data-transition="none">
-            <pre><code>
+            <pre><code class="php">
 if (file_exists(__DIR__ . '/settings.local.php')) {
   include __DIR__ . '/settings.local.php';
 }
@@ -697,7 +736,7 @@ if (file_exists(__DIR__ . '/settings.local.php')) {
 </code></pre>
           </section>
           <section data-transition="none">
-            <pre><code>
+            <pre><code class="php">
 if (file_exists(__DIR__ . '/settings.local.php')) {
   include __DIR__ . '/settings.local.php';
 }
@@ -712,7 +751,7 @@ else {
 }</code></pre>
           </section>
           <section>
-            <pre><code>
+            <pre><code class="yaml">
 - name: Create settings.ENVIRONMENT.php
   template:
     src: "{{ git_dir }}/sites/default/settings.{{ env_name }}.php"
