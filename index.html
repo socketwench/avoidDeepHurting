@@ -491,12 +491,12 @@ localhost ansible_connection=local</code></pre>
 - name: Symlink the files dir.
   file:
     src: "{{ files_dir }}"
-    dest: "{{ web_dir }}/sites/default/files"
+    dest: "{{ build_dir }}/sites/default/files"
     state: link
     mode: "0755"
     group: "www-data"
 
-# Now swap build/ and web/ </code></pre>
+# Continue building the site. </code></pre>
             </section>
             <!-- COMIC? -->
             <section>
@@ -582,11 +582,30 @@ localhost ansible_connection=local</code></pre>
           <section>
             <h1>I want to be lazy</h1>
           </section>
-          <!-- COMIC
-               This is great and all, but I'm still the one everyone slacks to deploy!
-               Can't I just be lazy?
-               Why can't the servers just do this for me?
-             -->
+          <section data-transition="none">
+            <img src="images/slackOps1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/slackOps2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/slackOps3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/slackOps4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/slackOps5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/slackOps6.png" />
+          </section>
+          <section>
+            <h2>Slack to Deploy</h2>
+            <p class="fragment">Bottlenecks testing/releasing code</p>
+            <p class="fragment">Makes ops a never-ending firefight</p>
+            <img src="images/jobDescription.png" class="fragment" />
+          </section>
           <section>
             <h2>CI Servers</h2>
             <p class="fragment">Monitors your repo for events</p>
@@ -737,13 +756,19 @@ db_name: "{{ lookup('env', 'LIVE_DB_NAME') }}"
 db_host: "{{ lookup('env', 'LIVE_DB_HOST') }}"
 db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"</code></pre>
           </section>
-          <!-- COMIC
-                Whoa! By environment variables are super mega insecure!
-              -->
+          <section>
+            <img src="images/envVarsInsecure.png" />
+          </section>
           <section>
             <h2>Gitlab CI env vars</h2>
             <p>Only set during the build</p>
             <p>Only for build's shell session</p>
+          </section>
+          <section data-transition="none">
+            <img src="images/notPersistent1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/notPersistent2.png" />
           </section>
           <section>
             <h2>Alternative: Ansible Vault</h2>
@@ -751,13 +776,52 @@ db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"</code></pre>
             <p>Store password in text file on server</p>
             <p><a href="http://docs.ansible.com/ansible/playbooks_vault.html">Vault on docs.ansible.com</a></p>
           </section>
-          <!-- COMIC
-               So what about settings.php?
-          -->
+          <section data-transition="none" data-background-transition="none" data-background="images/whatAboutSettingsPhp1.png" data-background-size="contain">
+            <p>&nbsp;</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/whatAboutSettingsPhp2.png" data-background-size="contain">
+            <p>&nbsp;</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/whatAboutSettingsPhp3.png" data-background-size="contain">
+            <p>&nbsp;</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/writeThemDuringTheBuild1.png" data-background-size="contain">
+            <pre><code class="php">
+$databases['default']['default'] = array(
+  'database' => 'live_drupal8',
+  'username' => 'drupal',
+  'password' => 'h0rs3App|3z_!',
+  'host' => 'mydb15.example.com',
+  'port' => '',
+  'driver' => 'mysql',
+  'prefix' => '',
+);
+            </code></pre>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/writeThemDuringTheBuild2.png" data-background-size="contain">
+            <pre><code class="php">
+$databases['default']['default'] = array(
+  'database' => 'live_drupal8',
+  'username' => 'drupal',
+  'password' => 'h0rs3App|3z_!',
+  'host' => 'mydb15.example.com',
+  'port' => '',
+  'driver' => 'mysql',
+  'prefix' => '',
+);
+            </code></pre>
+          </section>
           <section>
             <h2>Ansible Templates</h2>
             <p>Replace placeholders with ansible vars</p>
             <p>Twig-like syntax</p>
+          </section>
+          <section>
+<pre><code class="yaml">- name: Update settings file.
+  template:
+    src: "{{ build_dir }}/sites/default/settings.php"
+    dest: "{{ build_dir }}/sites/default/settings.php"
+    mode: "0755"</code></pre>
           </section>
           <section>
             <pre><code class="php">
