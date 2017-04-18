@@ -86,9 +86,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.83463635"
-     inkscape:cx="266.21886"
-     inkscape:cy="480.90041"
+     inkscape:zoom="0.51838742"
+     inkscape:cx="374.96491"
+     inkscape:cy="447.27139"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -651,7 +651,26 @@
            y="449.22137"
            style="fill:#00ff00;fill-opacity:1;stroke:none;stroke-opacity:1" /></flowRegion><flowPara
          id="flowPara7730-5-4"
-         style="font-size:30px;line-height:1.25;fill:#00ff00;fill-opacity:1;stroke:none;stroke-opacity:1">dIRECTORY</flowPara></flowRoot>  </g>
+         style="font-size:30px;line-height:1.25;fill:#00ff00;fill-opacity:1;stroke:none;stroke-opacity:1">dIRECTORY</flowPara></flowRoot>    <path
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#00ff00;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m -194.50114,836.01342 c -9.58983,-9.58982 -25.03035,-9.58982 -34.62017,0 l -5.59567,5.59567 17.21223,17.21222 a 10.630511,10.630511 0 0 1 5.69232,-1.65502 10.630511,10.630511 0 0 1 7.62638,3.22427 10.630511,10.630511 0 0 1 3.00441,7.40652 10.630511,10.630511 0 0 1 -1.66349,5.68386 l 19.06054,19.06054 a 10.630511,10.630511 0 0 1 5.21152,-1.37959 10.630511,10.630511 0 0 1 10.63079,10.63079 10.630511,10.630511 0 0 1 -10.62959,10.62959 10.630511,10.630511 0 0 1 -10.63079,-10.63079 10.630511,10.630511 0 0 1 1.96306,-6.14292 l -18.87933,-18.87933 a 10.630511,10.630511 0 0 1 -3.37286,1.38683 v 47.26598 a 10.630511,10.630511 0 0 1 8.31015,10.36624 10.630511,10.630511 0 0 1 -10.63079,10.63079 10.630511,10.630511 0 0 1 -10.63079,-10.63079 10.630511,10.630511 0 0 1 8.31013,-10.36141 V 878.1609 a 10.630511,10.630511 0 0 1 -8.30894,-10.36503 10.630511,10.630511 0 0 1 1.66347,-5.68626 l -17.21946,-17.21948 -39.59247,39.59247 c -9.58982,9.58983 -9.58982,25.03034 0,34.62017 l 48.46797,48.46796 c 9.58982,9.58983 25.03033,9.58983 34.62016,0 l 48.46918,-48.46918 c 9.58982,-9.58982 9.58983,-25.03034 0,-34.62016 z"
+       id="rect5370"
+       inkscape:connector-curvature="0" />
+    <flowRoot
+       transform="translate(-759.37435,526.6067)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:0.01%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#00ff00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="flowRoot5316-2-0"
+       xml:space="preserve"><flowRegion
+         id="flowRegion5318-5-1"
+         style="fill:#00ff00;fill-opacity:1"><rect
+           y="463.58447"
+           x="436.41748"
+           height="76.234917"
+           width="220.97087"
+           id="rect5320-2-7"
+           style="fill:#00ff00;fill-opacity:1" /></flowRegion><flowPara
+         id="flowPara14506-1"
+         style="font-size:30px;line-height:1.25;fill:#00ff00;fill-opacity:1">git repo</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
