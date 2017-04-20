@@ -32,20 +32,6 @@
             <p>&nbsp;</p>
             <small>use &larr;&uarr;&darr;&rarr; or &lt;SPACE&gt;</small>
           </section>
-          <section>
-            <pre style="font-size:1em;">
-      _________________
-    /                   \
-    |  Time to deploy!  |
-    \                   /
-      -----------------
-             \   ^__^
-              \  (oo)\_______
-                 (__)\       )\/\
-                     ||----w |
-                     ||     ||
-            </pre>
-          </section>
         </section>
 
 				<section>
@@ -73,6 +59,20 @@
           <section>
             <h1>Deploying Drupal</h1>
             <h2>A history</h2>
+          </section>
+          <section>
+            <pre style="font-size:1em;">
+      _________________
+    /                   \
+    |  Time to deploy!  |
+    \                   /
+      -----------------
+             \   ^__^
+              \  (oo)\_______
+                 (__)\       )\/\
+                     ||----w |
+                     ||     ||
+            </pre>
           </section>
           <section>
             <h2>Remember...</h2>
@@ -657,14 +657,46 @@ localhost ansible_connection=local</code></pre>
             <p class="fragment">Free and OSS</p>
           </section>
           <section>
-            <h2>Runners</h2>
-            <p class="fragment">Process that executes builds</p>
-            <p class="fragment">Local or remote via SSH</p>
+            <pre><code>gitlab:
+  image: 'gitlab/gitlab-ce:latest'
+  environment:
+    GITLAB_OMNIBUS_CONFIG: |
+      external_url 'http://socketwen.ch'
+  ports:
+    - '80:80'
+    - '443:443'
+    - '22:22'
+  volumes:
+    - '/srv/gitlab/config:/etc/gitlab'
+    - '/srv/gitlab/logs:/var/log/gitlab'
+    - '/srv/gitlab/data:/var/opt/gitlab'
+runner:
+  image: gitlab/gitlab-runner:alpine-v1.8.6
+  volumes:
+    - '/srv/gitlab-runner/config:/etc/gitlab-runner'
+</code></pre>
           </section>
           <section>
+            <h2>Runners</h2>
+            <p class="fragment">Process that executes builds</p>
+            <p class="fragment">Typically created for a specific project</p>
+          </section>
+          <section>
+            <pre><code>gitlab-runner register --non-interactive \
+  --url "http://socketwen.ch" \
+  --registration-token YOUR_GITLAB_TOKEN \
+  --name "RUNNER_NAME" \
+  --tag-list live \
+  --executor ssh \
+  --ssh-host PROJECT_SSH_HOST \
+  --ssh-port 22 \
+  --ssh-user PROJECT_SSH_USER \
+  --ssh-password PROJECT_SSH_PASSWORD</code></pre>
+            </section>
+          <section>
             <h2>.gitlab-ci.yml</h2>
-            <p class="fragment">Gitlab CI config file</p>
-            <p class="fragment">Put in the top level of your repo</p>
+            <p class="fragment">Maps a repository event...</p>
+            <p class="fragment">...to a series of steps to execute</p>
           </section>
           <section>
 <pre><code class="yaml">stages:
@@ -730,31 +762,33 @@ web_dir: "{{ base_dir }}/src"
           <section>
             <h1>Keys and credientials?</h1>
           </section>
+          <!-- COMIC
+              CI works best when you *never* SSH into the server -->
           <section>
             <h2>Old axiom holds true</h2>
             <p class="fragment">Never put your DB login in the repo!</p>
           </section>
           <section>
             <h2>Other stuff to keep out</h2>
-            <p>API keys</p>
-            <p>Cloud identity keys (IAM)</p>
-            <p>Hash salts<span class="fragment">?</span></p>
+            <p class="fragment">API keys</p>
+            <p class="fragment">Cloud identity keys (IAM)</p>
+            <p class="fragment">Hash salts<span class="fragment">?</span></p>
           </section>
           <section>
             <h2>Not so secret "secrets"</h2>
-            <p>Server username and group</p>
-            <p>Varnish key</p>
+            <p class="fragment">Server username and group</p>
+            <p class="fragment">Varnish key</p>
           </section>
           <section>
             <h2>Gitlab secure variables</h2>
-            <p>Unique per-repository</p>
-            <p>Stored encrypted on Gitlab server</p>
-            <p>Easy to define and edit</p>
+            <p class="fragment">Unique per-repository</p>
+            <p class="fragment">Stored encrypted on Gitlab server</p>
+            <p class="fragment">Easy to define and edit</p>
           </section>
           <section>
             <h2>Getting it to Ansible</h2>
-            <p>Exposed as environment variables</p>
-            <p>Use to set your ansible variable</p>
+            <p class="fragment">Exposed as environment variables</p>
+            <p class="fragment">Use to set your ansible variable</p>
           </section>
           <section data-transition=none>
 <pre><code class="yaml">---
@@ -790,8 +824,8 @@ db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"</code></pre>
           </section>
           <section>
             <h2>Gitlab CI env vars</h2>
-            <p>Only set during the build</p>
-            <p>Only for build's shell session</p>
+            <p class="fragment">Only set during the build</p>
+            <p class="fragment">Only for build's shell session</p>
           </section>
           <section data-transition="none">
             <img src="images/notPersistent1.png" />
@@ -801,9 +835,9 @@ db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"</code></pre>
           </section>
           <section>
             <h2>Alternative: Ansible Vault</h2>
-            <p>Encrypted var file</p>
-            <p>Store password in text file on server</p>
-            <p><a href="http://docs.ansible.com/ansible/playbooks_vault.html">Vault on docs.ansible.com</a></p>
+            <p class="fragment">Encrypted var file</p>
+            <p class="fragment">Store password in text file on server</p>
+            <p class="fragment"><a href="http://docs.ansible.com/ansible/playbooks_vault.html">Vault on docs.ansible.com</a></p>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/whatAboutSettingsPhp1.png" data-background-size="contain">
             <p>&nbsp;</p>
@@ -842,8 +876,8 @@ $databases['default']['default'] = array(
           </section>
           <section>
             <h2>Ansible Templates</h2>
-            <p>Replace placeholders with ansible vars</p>
-            <p>Twig-like syntax</p>
+            <p class="fragment">Replace placeholders with ansible vars</p>
+            <p class="fragment">Twig-like syntax</p>
           </section>
           <section>
 <pre><code class="yaml">- name: Update settings file.
@@ -865,15 +899,34 @@ $databases['default']['default'] = array(
 );
             </code></pre>
           </section>
-          <!-- COMIC
-              The DBs are different per environment
-              but
-              What about memcache? Varnish? Config overrides?
-            -->
+          <section data-transition="none">
+            <img src="images/envSettings1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/envSettings2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/envSettings3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/envSettings4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/envSettings5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/envSettings6.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/envSettings7.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/envSettings8.png" />
+          </section>
           <section>
             <h2>Updating settings.php</h2>
-            <p>Break up into per-env files</p>
-            <p>Conditionally <code>include</code> file</p>
+            <p class="fragment">Break up into per-env files</p>
+            <p class="fragment">Conditionally <code>include</code> file</p>
           </section>
           <section data-transition="none">
             <pre><code class="php">
@@ -945,11 +998,11 @@ else {
 
         <section>
           <section>
-            <h1>Special thanks</h1>
+            <h2>Special thanks</h2>
             <p class="fragment">Drupal Association</p>
 						<p class="fragment">TEN7</p>
             <p class="fragment">Jeff Geerling</p>
-            <p class="fragment">and others</p>
+            <p class="fragment"><a href="https://www.patreon.com/socketwench">patreon.com/socketwench</a></p>
           </section>
 
           <section>
