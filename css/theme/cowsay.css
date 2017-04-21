@@ -18,6 +18,15 @@ body {
   font-weight: normal;
   color: #ccc; }
 
+.reveal .teamten7 h1,
+.reveal .teamten7 p {
+  text-shadow: 0px 0px .2em #000000;
+}
+
+.reveal .teamten7 p {
+  color: white;
+}
+
 h1.deep-hurting {
   font-family: "Chelsea Market", sans-serif !important;
   font-size: 40px;
