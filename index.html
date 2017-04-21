@@ -677,6 +677,24 @@ runner:
 </code></pre>
           </section>
           <section>
+            <h2>.gitlab-ci.yml</h2>
+            <p class="fragment">Maps a repository event...</p>
+            <p class="fragment">...to a series of steps to execute</p>
+          </section>
+          <section>
+            <pre><code class="yaml">stages:
+- deploy
+
+job_live_deploy:
+  tags:
+    - live
+  stage: deploy
+  script:
+    - "ansible-playbook -i inventory/live live.yml"
+  only:
+    - master</code></pre>
+            </section>
+          <section>
             <h2>Runners</h2>
             <p class="fragment">Process that executes builds</p>
             <p class="fragment">Typically created for a specific project</p>
@@ -693,24 +711,6 @@ runner:
   --ssh-user PROJECT_SSH_USER \
   --ssh-password PROJECT_SSH_PASSWORD</code></pre>
             </section>
-          <section>
-            <h2>.gitlab-ci.yml</h2>
-            <p class="fragment">Maps a repository event...</p>
-            <p class="fragment">...to a series of steps to execute</p>
-          </section>
-          <section>
-<pre><code class="yaml">stages:
-  - deploy
-
-job_live_deploy:
-  tags:
-    - live
-  stage: deploy
-  script:
-    - "ansible-playbook -i inventory/live live.yml"
-  only:
-    - master</code></pre>
-          </section>
           <!-- COMIC
                Something about our directory organization
              -->
@@ -762,8 +762,21 @@ web_dir: "{{ base_dir }}/src"
           <section>
             <h1>Keys and credientials?</h1>
           </section>
-          <!-- COMIC
-              CI works best when you *never* SSH into the server -->
+          <section data-transition="none">
+            <img src="images/forgotAboutTheDB1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/forgotAboutTheDB2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/forgotAboutTheDB3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/forgotAboutTheDB4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/forgotAboutTheDB5.png" />
+          </section>
           <section>
             <h2>Old axiom holds true</h2>
             <p class="fragment">Never put your DB login in the repo!</p>
@@ -778,6 +791,12 @@ web_dir: "{{ base_dir }}/src"
             <h2>Not so secret "secrets"</h2>
             <p class="fragment">Server username and group</p>
             <p class="fragment">Varnish key</p>
+          </section>
+          <section data-transition="none">
+            <img src="images/whatsThePointOfCI1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/whatsThePointOfCI2.png" />
           </section>
           <section>
             <h2>Gitlab secure variables</h2>
