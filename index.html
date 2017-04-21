@@ -657,6 +657,12 @@ localhost ansible_connection=local</code></pre>
             <p class="fragment">Free and OSS</p>
           </section>
           <section>
+            <h2>Getting Gitlab</h2>
+            <p class="fragment"><a href="https://about.gitlab.com/products/">Gitlab.com free tier</a></p>
+            <p class="fragment"><a href="https://about.gitlab.com/downloads/">Download &amp; Self host</a></p>
+            <p class="fragment"><a href="https://docs.gitlab.com/omnibus/docker/README.html">Gitlab on Docker</a></p>
+          </section>
+          <section>
             <pre><code>gitlab:
   image: 'gitlab/gitlab-ce:latest'
   environment:
@@ -676,8 +682,31 @@ runner:
     - '/srv/gitlab-runner/config:/etc/gitlab-runner'
 </code></pre>
           </section>
+        </section>
+        <section>
           <section>
-            <h2>.gitlab-ci.yml</h2>
+            <h1>Building CI</h1>
+          </section>
+          <section data-transition="none">
+            <img src="images/gettingCIToTalkToServers1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/gettingCIToTalkToServers2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/gettingCIToTalkToServers3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/gettingCIToTalkToServers4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/gettingCIToTalkToServers5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/gettingCIToTalkToServers6.png" />
+          </section>
+          <section>
+            <img src="images/gitlab-ci-yml.png" />
             <p class="fragment">Maps a repository event...</p>
             <p class="fragment">...to a series of steps to execute</p>
           </section>
@@ -693,9 +722,27 @@ job_live_deploy:
     - "ansible-playbook -i inventory/live live.yml"
   only:
     - master</code></pre>
-            </section>
+          </section>
+          <section data-transition="none">
+            <img src="images/whenAndWhat1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/whenAndWhat2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/whenAndWhat3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/whenAndWhat4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/whenAndWhat5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/whenAndWhat6.png" />
+          </section>
           <section>
-            <h2>Runners</h2>
+            <img src="images/runners.png" />
             <p class="fragment">Process that executes builds</p>
             <p class="fragment">Typically created for a specific project</p>
           </section>
@@ -710,10 +757,12 @@ job_live_deploy:
   --ssh-port 22 \
   --ssh-user PROJECT_SSH_USER \
   --ssh-password PROJECT_SSH_PASSWORD</code></pre>
-            </section>
-          <!-- COMIC
-               Something about our directory organization
-             -->
+          </section>
+        </section>
+        <!-- <section>
+          <section>
+            <h1>Handling multiple environments</h1>
+          </section>
           <section>
             <h2>Environment playbooks</h2>
             <p>Allows customization per environment</p>
@@ -754,9 +803,9 @@ git_dir: "{{ base_dir }}/git"
 build_dir: "{{ base_dir }}/wip"
 web_dir: "{{ base_dir }}/src"
             </code></pre>
-          </section>
+          </section>-->
           <!-- Something about galaxy? -->
-        </section>
+        <!-- </section> -->
 
         <section>
           <section>
@@ -1007,7 +1056,7 @@ else {
           </section>
           <section>
             <h2>Make CI do everything</h2>
-            <p class="fragment">Varnish ban, bounce Apache, anything needed</p>
+            <p class="fragment">Varnish ban, bounce Apache, anything</p>
           </section>
           <section>
             <h2>CI hurts now...</h2>
@@ -1028,7 +1077,7 @@ else {
             <h2>FRIDAY SPRINTS</h2>
           </section>
 
-          <section>
+          <section data-background-transition="none" data-background="images/thankyou.png" data-background-size="contain">
             <h1>Thank you!</h1>
             <p>FEEDBACK LINK HERE</p>
             <p>socketwench.github.io/avoidDeepHurting</p>
