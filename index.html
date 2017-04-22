@@ -290,9 +290,10 @@
             <p class="fragment">Whatever runs ansible is the controller</p>
           </section>
           <section>
-            <h2>Specifying targets</h2>
-            <p class="fragment">Inventory files</p>
+            <img src="images/inventory.png" />
+            <p class="fragment">Specifies targets to manage</p>
             <p class="fragment">Text file of IPs/Hostnames</p>
+            <p class="fragment">Global inventory: <code>/etc/ansible/hosts</code></p>
           </section>
           <section>
 <pre><code class="ini">172.52.52.0
@@ -312,9 +313,9 @@ localhost ansible_connection=local</code></pre>
           </section>
           <section>
 <pre><code class="yaml">---
-- hosts: all
+- hosts: all  # Target all systems!</code></pre><pre class="fragment"><code class="yaml">
   vars:
-    heyLook: "A variable!"
+    heyLook: "A variable!"</code></pre><pre class="fragment"><code class="yaml">
   tasks:
     - name: Make some stuff happen
       stuffDoer:
@@ -340,6 +341,37 @@ localhost ansible_connection=local</code></pre>
         update: yes
         version: "develop"</code></pre>
           </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/whatIfIDoneWantTOTargetGlobal1.png" data-background-size="contain">
+            <h2>Running playbooks</h2>
+            <p class="fragment"><code>ansible-playbook path/to/play.yml</code></p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/whatIfIDoneWantTOTargetGlobal2.png" data-background-size="contain">
+            <h2>Running playbooks</h2>
+            <p><code>ansible-playbook path/to/play.yml</code></p>
+          </section>
+          <section>
+            <h2>Narrowing targets</h2>
+            <p class="fragment">Update playbook <code>hosts</code> to group name</p>
+            <p class="fragment">Use <code>-i path/to/inventory</code></p>
+          </section>
+          <section data-transition="none">
+            <img src="images/ansibleDirs1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/ansibleDirs2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/ansibleDirs3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/ansibleDirs4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/ansibleDirs5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/ansibleDirs6.png" />
+          </section>
         </section>
 
         <section>
@@ -360,10 +392,6 @@ localhost ansible_connection=local</code></pre>
             <p class="fragment">It should do one thing well...</p>
             <p class="fragment">...not several things okay.</p>
           </section>
-          <!-- COMIC
-            Ends on realization that throwing the web directory away is the
-            solution.
-           -->
            <section data-transition="none">
              <img src="images/threeDirectories1.png" />
            </section>
@@ -447,16 +475,6 @@ localhost ansible_connection=local</code></pre>
     creates: "{{ web_dir }}"
     removes: "{{ build_dir }}"</code></pre>
             </section>
-            <!-- <section>
-              <h2>Alternative: Capistrano style</h2>
-              <p>Timestamp-named build directories</p>
-              <p class="fragment"><code>current</code> symlink used as web directory</p>
-            </section>
-            <section>
-              <h2>Problems</h2>
-              <p class="fragment">OpCache refresh must be forced</p>
-              <p class="fragment">Autoloaders can become confused</p>
-            </section> -->
             <section data-transition="none">
               <img src="images/wheresTheFileDir1.png" />
             </section>
@@ -499,7 +517,6 @@ localhost ansible_connection=local</code></pre>
 
 # Continue building the site. </code></pre>
             </section>
-            <!-- COMIC? -->
             <section>
               <h2>Post Go-live Tasks</h2>
               <p class="fragment">Config Sync import</p>
@@ -601,11 +618,17 @@ localhost ansible_connection=local</code></pre>
           <section data-transition="none">
             <img src="images/slackOps6.png" />
           </section>
-          <section>
+          <section data-transition="none">
             <h2>Slack to Deploy</h2>
             <p class="fragment">Bottlenecks testing/releasing code</p>
             <p class="fragment">Makes ops a never-ending firefight</p>
-            <img src="images/jobDescription.png" class="fragment" />
+            <p>&nbsp;</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/jobDescription.png" data-background-size="contain">
+            <h2>Slack to Deploy</h2>
+            <p>Bottlenecks testing/releasing code</p>
+            <p>Makes ops a never-ending firefight</p>
+            <p>&nbsp;</p>
           </section>
           <section>
             <h2>Continuous Integration (CI)</h2>
@@ -675,12 +698,6 @@ runner:
     - '/srv/gitlab-runner/config:/etc/gitlab-runner'
 </code></pre>
           </section>
-        </section>
-
-        <section>
-          <section>
-            <h1>Building CI</h1>
-          </section>
           <section data-transition="none">
             <img src="images/gettingCIToTalkToServers1.png" />
           </section>
@@ -704,18 +721,50 @@ runner:
             <p class="fragment">Maps a repository event...</p>
             <p class="fragment">...to a series of steps to execute</p>
           </section>
-          <section>
+          <section data-transition="none">
             <pre><code class="yaml">stages:
-- deploy
+  - deploy
 
 job_live_deploy:
   tags:
     - live
   stage: deploy
   script:
-    - "ansible-playbook -i inventory/live live.yml"
+    - "ansible-playbook -i inventories/live live.yml"
   only:
-    - master</code></pre>
+    - master
+
+
+
+
+
+
+
+
+
+</code></pre>
+          </section>
+          <section data-transition="none">
+            <pre><code class="yaml">stages:
+  - deploy
+
+job_live_deploy:
+  tags:
+    - live
+  stage: deploy
+  script:
+    - "ansible-playbook -i inventories/live live.yml"
+  only:
+    - master
+
+job_stage_deploy:
+  tags:
+    - stage
+  stage: deploy
+  script:
+    - "ansible-playbook -i inventories/stage stage.yml"
+  only:
+    - develop</code></pre>
           </section>
           <section data-transition="none">
             <img src="images/whenAndWhat1.png" />
@@ -735,15 +784,42 @@ job_live_deploy:
           <section data-transition="none">
             <img src="images/whenAndWhat6.png" />
           </section>
+          <section data-transition="none">
+            <img src="images/whenAndWhat7.png" />
+          </section>
           <section>
             <img src="images/runners.png" />
             <p class="fragment">Process that executes builds</p>
             <p class="fragment">Typically created for a specific project</p>
           </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess5.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess6.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess7.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess8.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/runnerProcess9.png" />
+          </section>
           <section>
-            <!-- This seems too techincal? Mybe provide a conceptual diagram
-                 that shows how gitlab executes the runner which connects
-                 to the system instead? -->
             <pre><code>gitlab-runner register --non-interactive \
   --url "http://socketwen.ch" \
   --registration-token YOUR_GITLAB_TOKEN \
@@ -754,6 +830,18 @@ job_live_deploy:
   --ssh-port 22 \
   --ssh-user PROJECT_SSH_USER \
   --ssh-password PROJECT_SSH_PASSWORD</code></pre>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/bestForShared1.png" data-background-size="contain">
+            <h2>Methods</h2>
+            <p class="fragment">Runner to web server, ansible runs locally</p>
+            <p class="fragment">Runner to CI server, ansible runs remotely</p>
+            <p>&nbsp;</p>
+          </section>
+          <section data-transition="none" data-background-transition="none" data-background="images/bestForShared2.png" data-background-size="contain">
+            <h2>Methods</h2>
+            <p>Runner to web server, ansible runs locally</p>
+            <p>Runner to CI server, ansible runs remotely</p>
+            <p>&nbsp;</p>
           </section>
         </section>
 
@@ -990,81 +1078,44 @@ else {
 
         <section>
           <section>
-            <h1>Handling multiple sites</h1>
-          </section>
-          <!-- COMIC
-            But I have a live {and} a stage server.
-            How do I handle that?
-          -->
-          <section>
-            <h2>Environment playbooks</h2>
-            <p>Allows customization per environment</p>
-            <p>Different file paths, enable/disable modules, etc.</p>
-          </section>
-          <section>
-            <h2>Inventories</h2>
-            <p>One file per environment</p>
-            <p>Each environment in a separate <code>[group]</code></p>
+            <h1>Multi-project CI</h1>
           </section>
           <section data-transition="none">
-            <pre><code class="yaml">stages:
-  - deploy
-
-job_live_deploy:
-  tags:
-    - live
-  stage: deploy
-  script:
-    - "ansible-playbook -i inventory/live live.yml"
-  only:
-    - master
-
-
-
-
-
-
-
-
-
-</code></pre>
+            <img src="images/similarPlaybooks1.png" />
           </section>
           <section data-transition="none">
-            <pre><code class="yaml">stages:
-  - deploy
-
-job_live_deploy:
-  tags:
-    - live
-  stage: deploy
-  script:
-    - "ansible-playbook -i inventory/live live.yml"
-  only:
-    - master
-
-job_stage_deploy:
-  tags:
-    - stage
-  stage: deploy
-  script:
-    - "ansible-playbook -i inventory/stage stage.yml"
-  only:
-    - develop</code></pre>
+            <img src="images/similarPlaybooks2.png" />
           </section>
-          <!-- COMIC
-            But all my variables
-          -->
-
+          <section data-transition="none">
+            <img src="images/similarPlaybooks3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/similarPlaybooks4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/similarPlaybooks5.png" />
+          </section>
           <section>
             <h2>Ansible Roles</h2>
-            <p>Reusable, parameterized, config sets</p>
-            <p>Packages up playbooks &amp; var defaults</p>
+            <p class="fragment">Reusable, parameterized, config sets</p>
+            <p class="fragment">Packages up playbooks &amp; var defaults</p>
+            <p class="fragment"><a href="http://docs.ansible.com/ansible/playbooks_roles.html#roles">Roles on Ansible Docs</a></p>
           </section>
-          <!-- This might be a new section -->
-          <!-- COMIC
-                 All the CI code is stuck in one repo
-                If I need to update it, it'd take all day.
-                -->
+          <section data-transition="none">
+            <img src="images/copyPastedRoles1.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/copyPastedRoles2.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/copyPastedRoles3.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/copyPastedRoles4.png" />
+          </section>
+          <section data-transition="none">
+            <img src="images/copyPastedRoles5.png" />
+          </section>
           <section>
             <img src="images/ansibleGalaxy.png" />
             <p class="fragment">Distribution for Ansible Roles</p>
@@ -1072,7 +1123,7 @@ job_stage_deploy:
           </section>
           <section>
             <h2>Getting Roles from Galaxy</h2>
-            <p class="fragment"><code>ansible-install</code></p>
+            <p class="fragment"><code>ansible-galaxy install</code></p>
             <p class="fragment">Takes one or more <em><code>org.RoleNames</code></em></p>
           </section>
           <section>
@@ -1097,6 +1148,25 @@ job_stage_deploy:
             <pre class="fragment"><code class="sh">  -r requirements.yml \   # Use a reqs file</code></pre>
             <pre class="fragment"><code class="sh">  --ignore-errors         # Skip if github is down</code></pre>
           </section>
+          <section data-transition="none">
+            <pre><code class="yaml">stages:
+  - deploy
+
+job_live_deploy:
+  tags:
+    - live
+  stage: deploy
+  script:
+    - "ansible-galaxy install -fr requirements.yml --ignore-errors"
+    - "ansible-playbook -i inventories/live live.yml"
+  only:
+    - master
+</code></pre>
+            <small class="fragment">(Scroll right.)</small>
+          </section>
+          <section>
+            <img src="images/happyOpsPerson.png" />
+          </section>
         </section>
 
         <section>
@@ -1112,8 +1182,8 @@ job_stage_deploy:
             <p class="fragment">Use secure vars for logins and keys</p>
           </section>
           <section>
-            <h2>Keep branches the same</h2>
-            <p class="fragment">Separate conf files per environment</p>
+            <h2>Different env, different file</h2>
+            <p class="fragment">Keep your branches the same!</p>
           </section>
           <section>
             <h2>Make CI do everything</h2>
