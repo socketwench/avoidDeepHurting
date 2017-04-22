@@ -63,7 +63,7 @@
             <h1>Deploying Drupal</h1>
             <h2>A history</h2>
           </section>
-          <section>
+          <!-- <section>
             <pre style="font-size:1em;">
       _________________
     /                   \
@@ -76,7 +76,7 @@
                      ||----w |
                      ||     ||
             </pre>
-          </section>
+          </section> -->
           <section>
             <h2>Remember...</h2>
             <p class="fragment">FTP&gt; <span class="blink_me">&block;</span></p>
@@ -339,11 +339,6 @@ localhost ansible_connection=local</code></pre>
         clone: yes
         update: yes
         version: "develop"</code></pre>
-          </section>
-          <section>
-            <h2>Idemnopent</h2>
-            <p class="fragment">Playbooks describe desired end state</p>
-            <p class="fragment">Leaves complex <code>if</code>/<code>else</code> logic to modules</p>
           </section>
         </section>
 
@@ -644,11 +639,6 @@ localhost ansible_connection=local</code></pre>
             <img src="images/ciProcess6.png" />
           </section>
           <section>
-            <h2>Travis CI</h2>
-            <p>Included for free on Github!</p>
-            <p>Public repos only, some limitations</p>
-          </section>
-          <section>
             <h2>Self-hosted, OSS CIs</h2>
             <p class="fragment">Jenkins</p>
             <p class="fragment">Circle CI</p>
@@ -686,6 +676,7 @@ runner:
 </code></pre>
           </section>
         </section>
+
         <section>
           <section>
             <h1>Building CI</h1>
@@ -750,6 +741,9 @@ job_live_deploy:
             <p class="fragment">Typically created for a specific project</p>
           </section>
           <section>
+            <!-- This seems too techincal? Mybe provide a conceptual diagram
+                 that shows how gitlab executes the runner which connects
+                 to the system instead? -->
             <pre><code>gitlab-runner register --non-interactive \
   --url "http://socketwen.ch" \
   --registration-token YOUR_GITLAB_TOKEN \
@@ -762,57 +756,10 @@ job_live_deploy:
   --ssh-password PROJECT_SSH_PASSWORD</code></pre>
           </section>
         </section>
-        <!-- <section>
-          <section>
-            <h1>Handling multiple environments</h1>
-          </section>
-          <section>
-            <h2>Environment playbooks</h2>
-            <p>Allows customization per environment</p>
-            <p>Different file paths, enable/disable modules, etc.</p>
-          </section>
-          <section>
-            <h2>Inventories</h2>
-            <p>One file per environment</p>
-          </section>
-          <section>
-            <pre><code class="ini">
-[live]
-localhost ansible_connection=local
-            </code></pre>
-          </section>
-          <section>
-            <h2>What about shared hosts?</h2>
-            <p>Ansible isn't installed</p>
-            <p>CI server used as controller</p>
-          </section>
-          <section>
-            <pre><code class="ini">
-[live]
-example.com ansible_user=jane
-            </code></pre>
-          </section>
-          <section>
-            <h2>Group vars</h2>
-            <p>Defines variables for a host group</p>
-            <p>Loaded transparently, just specfy <code>-i</code></p>
-          </section>
-          <section>
-            <pre><code class="yaml">
----
-env_name: "live"
-base_dir: "/virtual/sites/example.com"
-git_dir: "{{ base_dir }}/git"
-build_dir: "{{ base_dir }}/wip"
-web_dir: "{{ base_dir }}/src"
-            </code></pre>
-          </section>-->
-          <!-- Something about galaxy? -->
-        <!-- </section> -->
 
         <section>
           <section>
-            <h1>Keys and credientials?</h1>
+            <h1>Keys and credentials?</h1>
           </section>
           <section data-transition="none">
             <img src="images/forgotAboutTheDB1.png" />
@@ -1043,7 +990,118 @@ else {
 
         <section>
           <section>
-            <h1>Takeaways</h1>
+            <h1>Handling multiple sites</h1>
+          </section>
+          <!-- COMIC
+            But I have a live {and} a stage server.
+            How do I handle that?
+          -->
+          <section>
+            <h2>Environment playbooks</h2>
+            <p>Allows customization per environment</p>
+            <p>Different file paths, enable/disable modules, etc.</p>
+          </section>
+          <section>
+            <h2>Inventories</h2>
+            <p>One file per environment</p>
+            <p>Each environment in a separate <code>[group]</code></p>
+          </section>
+          <section data-transition="none">
+            <pre><code class="yaml">stages:
+  - deploy
+
+job_live_deploy:
+  tags:
+    - live
+  stage: deploy
+  script:
+    - "ansible-playbook -i inventory/live live.yml"
+  only:
+    - master
+
+
+
+
+
+
+
+
+
+</code></pre>
+          </section>
+          <section data-transition="none">
+            <pre><code class="yaml">stages:
+  - deploy
+
+job_live_deploy:
+  tags:
+    - live
+  stage: deploy
+  script:
+    - "ansible-playbook -i inventory/live live.yml"
+  only:
+    - master
+
+job_stage_deploy:
+  tags:
+    - stage
+  stage: deploy
+  script:
+    - "ansible-playbook -i inventory/stage stage.yml"
+  only:
+    - develop</code></pre>
+          </section>
+          <!-- COMIC
+            But all my variables
+          -->
+
+          <section>
+            <h2>Ansible Roles</h2>
+            <p>Reusable, parameterized, config sets</p>
+            <p>Packages up playbooks &amp; var defaults</p>
+          </section>
+          <!-- This might be a new section -->
+          <!-- COMIC
+                 All the CI code is stuck in one repo
+                If I need to update it, it'd take all day.
+                -->
+          <section>
+            <img src="images/ansibleGalaxy.png" />
+            <p class="fragment">Distribution for Ansible Roles</p>
+            <p class="fragment"><a href="https://galaxy.ansible.com/">galaxy.ansible.com</a></p>
+          </section>
+          <section>
+            <h2>Getting Roles from Galaxy</h2>
+            <p class="fragment"><code>ansible-install</code></p>
+            <p class="fragment">Takes one or more <em><code>org.RoleNames</code></em></p>
+          </section>
+          <section>
+            <h2>Roles for Drupal CI</h2>
+            <p class="fragment"><a href="https://galaxy.ansible.com/ten7/drupal-backup/">ten7.drupal-backup</a></p>
+            <p class="fragment"><a href="https://galaxy.ansible.com/ten7/drupal-deploy/">ten7.drupal-deploy</a></p>
+            <p class="fragment">Source on <a href="https://github.com/ten7">Github</a></p>
+          </section>
+          <section>
+            <img src="images/requirements-yml.png" />
+            <p class="fragment">List of roles to install</p>
+            <p class="fragment">From Galaxy or a git repo</p>
+          </section>
+          <section>
+            <pre><code class="yaml">---
+- src: ten7.drupal-backup
+- src: ten7.drupal-deploy</code></pre>
+          </section>
+          <section>
+            <pre><code class="sh">ansible-galaxy install \  # Install from Galaxy</code></pre>
+            <pre class="fragment"><code class="sh">  -f \                    # Download each time</code></pre>
+            <pre class="fragment"><code class="sh">  -r requirements.yml \   # Use a reqs file</code></pre>
+            <pre class="fragment"><code class="sh">  --ignore-errors         # Skip if github is down</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h1>Summary</h1>
           </section>
           <section>
             <h2>The Repo is the Server</h2>
@@ -1065,6 +1123,18 @@ else {
             <h2>CI hurts now...</h2>
             <p class="fragment">...so it doesn't later.</p>
           </section>
+          <section>
+            <h2>More things to try</h2>
+            <p class="fragment">Group vars for cleaner playbooks</p>
+            <p class="fragment">Ansible <code>cron</code> module</p>
+            <p class="fragment">Offsite backup with <a href="https://galaxy.ansible.com/ten7/tractorbeam/">ten7.tractorbeam</a></p>
+          </section>
+          <section>
+            <h2>Things to read</h2>
+            <p class="fragment"><em>Continuous Integration</em> by Duvall <em>et al</em></p>
+            <p class="fragment"><em><a href="https://www.ansiblefordevops.com/">Ansible for DevOps</a></em> by Jeff Geerling</p>
+            <p class="fragment"><a href="http://docs.ansible.com/ansible/index.html">docs.ansible.com</a></p>
+          </section>
         </section>
 
         <section>
@@ -1072,7 +1142,6 @@ else {
             <h2>Special thanks</h2>
             <p class="fragment">Drupal Association</p>
 						<p class="fragment">TEN7</p>
-            <p class="fragment">Jeff Geerling</p>
             <p class="fragment"><a href="https://www.patreon.com/socketwench">patreon.com/socketwench</a></p>
           </section>
 
