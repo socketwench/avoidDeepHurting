@@ -215,7 +215,7 @@
        xml:space="preserve"
        id="flowRoot12693-2"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(260.09671,348.55596)"><flowRegion
+       transform="translate(-127.63486,552.36358)"><flowRegion
          id="flowRegion12695-4"><rect
            id="rect12697-6"
            width="375.89145"
@@ -223,11 +223,7 @@
            x="373.33292"
            y="40.616615" /></flowRegion><flowPara
          id="flowPara12699-0"
-         style="fill:#00ff00;fill-opacity:1">The variables aren't persistent,</flowPara></flowRoot>    <path
-       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#00ff00;stroke-width:3.9000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="M 814.17578 361.23047 A 231.14767 70.421333 0 0 0 583.02734 431.65234 A 231.14767 70.421333 0 0 0 814.17578 502.07422 A 231.14767 70.421333 0 0 0 875.65234 499.53125 L 927.9043 568.35156 L 912.52539 495.29883 A 231.14767 70.421333 0 0 0 1045.3223 431.65234 A 231.14767 70.421333 0 0 0 814.17578 361.23047 z "
-       id="path13942" />
-  </g>
+         style="fill:#00ff00;fill-opacity:1">The variables aren't persistent,</flowPara></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer25"
@@ -237,19 +233,18 @@
        xml:space="preserve"
        id="flowRoot12693-2-2"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:'Anime Ace 2.0 BB';-inkscape-font-specification:'Anime Ace 2.0 BB, Normal';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="translate(25.307368,547.68659)"><flowRegion
+       transform="translate(58.446819,637.79099)"><flowRegion
          id="flowRegion12695-4-3"><rect
            id="rect12697-6-3"
-           width="375.89145"
-           height="135.87418"
+           width="410.68787"
+           height="96.106827"
            x="373.33292"
            y="40.616615" /></flowRegion><flowPara
          id="flowPara12699-0-2"
          style="fill:#00ff00;fill-opacity:1">So the attack surface is smaller.</flowPara></flowRoot>    <path
-       style="display:inline;opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#00ff00;stroke-width:3.9000001;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 586.56836,556.75391 a 197.17973,85.334084 0 0 0 -197.17969,85.33398 197.17973,85.334084 0 0 0 197.17969,85.33399 197.17973,85.334084 0 0 0 193.88867,-70.21094 L 896.42188,623.0332 776.31445,618.93945 A 197.17973,85.334084 0 0 0 586.56836,556.75391 Z"
-       id="path13944"
-       inkscape:connector-curvature="0" />
+       style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#00ff00;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 433.98438 577.55078 A 211.26401 60.4795 0 0 0 222.7207 638.0293 A 211.26401 60.4795 0 0 0 430.30273 698.45703 A 233.56439 62.067722 0 0 0 404.6543 726.59375 A 233.56439 62.067722 0 0 0 638.21875 788.66016 A 233.56439 62.067722 0 0 0 871.7832 726.59375 A 233.56439 62.067722 0 0 0 779.37891 677.24219 C 805.63191 660.25741 856.87219 651.60203 908.02148 642.91602 C 828.21726 626.92457 782.18692 648.45963 736.48828 670.36328 A 233.56439 62.067722 0 0 0 638.21875 664.52539 A 233.56439 62.067722 0 0 0 623.36914 664.66602 A 211.26401 60.4795 0 0 0 645.24805 638.0293 A 211.26401 60.4795 0 0 0 433.98438 577.55078 z "
+       id="path4768" />
   </g>
   <g
      inkscape:groupmode="layer"
