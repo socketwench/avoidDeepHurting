@@ -34,6 +34,12 @@
           </section>
         </section>
 
+        <section>
+          <h2>"Where's the links?"</h2>
+          <p>socketwench.github.io/avoidDeepHurting</p>
+          <small>Yeah, it's case sensitive</small>
+        </section>
+
 				<section>
           <section data-transition="none">
             <img src="images/socketwench1.png" />
@@ -63,20 +69,6 @@
             <h1>Deploying Drupal</h1>
             <h2>A history</h2>
           </section>
-          <!-- <section>
-            <pre style="font-size:1em;">
-      _________________
-    /                   \
-    |  Time to deploy!  |
-    \                   /
-      -----------------
-             \   ^__^
-              \  (oo)\_______
-                 (__)\       )\/\
-                     ||----w |
-                     ||     ||
-            </pre>
-          </section> -->
           <section>
             <h2>Remember...</h2>
             <p class="fragment">FTP&gt; <span class="blink_me">&block;</span></p>
@@ -423,14 +415,14 @@ localhost ansible_connection=local</code></pre>
              <img src="images/threeDirectories10.png" />
            </section>
            <section>
-             <h2>Ready before Go-live</h2>
-             <p class="fragment"><em>Artefacts</em> created before switchover</p>
-             <p class="fragment">Generated assets, compiled SASS, etc.</p>
-           </section>
-           <section>
              <h2>No more .gitignore hell</h2>
              <p class="fragment">Git directory only mirrors the repo</p>
              <p class="fragment">No more <code>git clean -df</code></p>
+           </section>
+           <section>
+             <h2>Ready before Go-live</h2>
+             <p class="fragment"><em>Artefacts</em> created before switchover</p>
+             <p class="fragment">Generated assets, compiled SASS, etc.</p>
            </section>
            <section>
              <h2>"Zero" downtime</h2>
@@ -662,12 +654,6 @@ localhost ansible_connection=local</code></pre>
             <img src="images/ciProcess6.png" />
           </section>
           <section>
-            <h2>Self-hosted, OSS CIs</h2>
-            <p class="fragment">Jenkins</p>
-            <p class="fragment">Circle CI</p>
-            <p class="fragment">Many others!</p>
-          </section>
-          <section>
             <h2>Gitlab CI</h2>
             <p class="fragment">Integrated with Gitlab CE</p>
             <p class="fragment">Free and OSS</p>
@@ -722,7 +708,7 @@ runner:
             <p class="fragment">...to a series of steps to execute</p>
           </section>
           <section data-transition="none">
-            <pre><code class="yaml">stages:
+            <pre><code class="yaml" style="font-size: 0.9em;">stages:
   - deploy
 
 job_live_deploy:
@@ -745,7 +731,7 @@ job_live_deploy:
 </code></pre>
           </section>
           <section data-transition="none">
-            <pre><code class="yaml">stages:
+            <pre><code class="yaml" style="font-size: 0.9em;">stages:
   - deploy
 
 job_live_deploy:
@@ -874,11 +860,6 @@ job_stage_deploy:
             <p class="fragment">Cloud identity keys (IAM)</p>
             <p class="fragment">Hash salts<span class="fragment">?</span></p>
           </section>
-          <section>
-            <h2>Not so secret "secrets"</h2>
-            <p class="fragment">Server username and group</p>
-            <p class="fragment">Varnish key</p>
-          </section>
           <section data-transition="none">
             <img src="images/whatsThePointOfCI1.png" />
           </section>
@@ -896,54 +877,32 @@ job_stage_deploy:
             <p class="fragment">Exposed as environment variables</p>
             <p class="fragment">Use to set your ansible variable</p>
           </section>
-          <section data-transition=none>
+          <section>
 <pre><code class="yaml">---
 env_name: "live"
 base_dir: "/virtual/sites/example.com"
 git_dir: "{{ base_dir }}/git"
 build_dir: "{{ base_dir }}/wip"
 web_dir: "{{ base_dir }}/src"
-
-
-
-
-
-
-</code></pre>
-          </section>
-          <section data-transition="none">
-<pre><code class="yaml">---
-env_name: "live"
-base_dir: "/virtual/sites/example.com"
-git_dir: "{{ base_dir }}/git"
-build_dir: "{{ base_dir }}/wip"
-web_dir: "{{ base_dir }}/src"
-
+</code></pre><pre class="fragment"><code class="yaml">
 db_user: "{{ lookup('env', 'LIVE_DB_USER') }}"
 db_pass: "{{ lookup('env', 'LIVE_DB_PASS') }}"
 db_name: "{{ lookup('env', 'LIVE_DB_NAME') }}"
 db_host: "{{ lookup('env', 'LIVE_DB_HOST') }}"
 db_port: "{{ lookup('env', 'LIVE_DB_PORT') }}"</code></pre>
           </section>
-          <section>
-            <img src="images/envVarsInsecure.png" />
+          <section data-transition="none" data-background-transition="none" data-background="images/envVarsInsecure.png" data-background-size="contain">
+            <p>&nbsp;</p>
           </section>
-          <section>
+          <section data-transition="none" data-background-transition="none" data-background="images/notPersistent1.png" data-background-size="contain">
             <h2>Gitlab CI env vars</h2>
             <p class="fragment">Only set during the build</p>
             <p class="fragment">Only for build's shell session</p>
           </section>
-          <section data-transition="none">
-            <img src="images/notPersistent1.png" />
-          </section>
-          <section data-transition="none">
-            <img src="images/notPersistent2.png" />
-          </section>
-          <section>
-            <h2>Alternative: Ansible Vault</h2>
-            <p class="fragment">Encrypted var file</p>
-            <p class="fragment">Store password in text file on server</p>
-            <p class="fragment"><a href="http://docs.ansible.com/ansible/playbooks_vault.html">Vault on docs.ansible.com</a></p>
+          <section data-transition="none" data-background-transition="none" data-background="images/notPersistent2.png" data-background-size="contain">
+            <h2>Gitlab CI env vars</h2>
+            <p>Only set during the build</p>
+            <p>Only for build's shell session</p>
           </section>
           <section data-transition="none" data-background-transition="none" data-background="images/whatAboutSettingsPhp1.png" data-background-size="contain">
             <p>&nbsp;</p>
@@ -1142,12 +1101,6 @@ else {
 - src: ten7.drupal-backup
 - src: ten7.drupal-deploy</code></pre>
           </section>
-          <section>
-            <pre><code class="sh">ansible-galaxy install \  # Install from Galaxy</code></pre>
-            <pre class="fragment"><code class="sh">  -f \                    # Download each time</code></pre>
-            <pre class="fragment"><code class="sh">  -r requirements.yml \   # Use a reqs file</code></pre>
-            <pre class="fragment"><code class="sh">  --ignore-errors         # Skip if github is down</code></pre>
-          </section>
           <section data-transition="none">
             <pre><code class="yaml">stages:
   - deploy
@@ -1165,45 +1118,13 @@ job_live_deploy:
             <small class="fragment">(Scroll right.)</small>
           </section>
           <section>
+            <pre><code class="sh">ansible-galaxy install \  # Install from Galaxy</code></pre>
+            <pre class="fragment"><code class="sh">  -f \                    # Download each time</code></pre>
+            <pre class="fragment"><code class="sh">  -r requirements.yml \   # Use a reqs file</code></pre>
+            <pre class="fragment"><code class="sh">  --ignore-errors         # Skip if github is down</code></pre>
+          </section>
+          <section>
             <img src="images/happyOpsPerson.png" />
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h1>Summary</h1>
-          </section>
-          <section>
-            <h2>The Repo is the Server</h2>
-            <p class="fragment">Never SSH in unless something breaks</p>
-          </section>
-          <section>
-            <h2>Everything is in the repo*</h2>
-            <p class="fragment">Use secure vars for logins and keys</p>
-          </section>
-          <section>
-            <h2>Different env, different file</h2>
-            <p class="fragment">Keep your branches the same!</p>
-          </section>
-          <section>
-            <h2>Make CI do everything</h2>
-            <p class="fragment">Varnish ban, bounce Apache, anything</p>
-          </section>
-          <section>
-            <h2>CI hurts now...</h2>
-            <p class="fragment">...so it doesn't later.</p>
-          </section>
-          <section>
-            <h2>More things to try</h2>
-            <p class="fragment">Group vars for cleaner playbooks</p>
-            <p class="fragment">Ansible <code>cron</code> module</p>
-            <p class="fragment">Offsite backup with <a href="https://galaxy.ansible.com/ten7/tractorbeam/">ten7.tractorbeam</a></p>
-          </section>
-          <section>
-            <h2>Things to read</h2>
-            <p class="fragment"><em>Continuous Integration</em> by Duvall <em>et al</em></p>
-            <p class="fragment"><em><a href="https://www.ansiblefordevops.com/">Ansible for DevOps</a></em> by Jeff Geerling</p>
-            <p class="fragment"><a href="http://docs.ansible.com/ansible/index.html">docs.ansible.com</a></p>
           </section>
         </section>
 
